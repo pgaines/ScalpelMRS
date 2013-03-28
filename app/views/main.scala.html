@@ -1,0 +1,53 @@
+@(user: User)(body: Html)
+
+<html>
+    <head>
+        <title>ScalpelMRS</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/red/main.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/red/bootstrap.min.css")"> 		
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.1.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-play-1.7.1.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/underscore-min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/backbone-min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
+
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Users.index()" id="logo"><span>Scalpel</span>MRS</a>
+            <dl id="user">
+				@if((user.username != null) && (user != null)) {			
+                <dt>@user.username <span>(@user.email)</span></dt>			
+                <dd>
+                    <a href="@routes.Users.editAccount()">Edit Account</a>
+                </dd>	
+                <dd>
+                    <a href="@routes.Users.summary()">Account Summary</a>
+                </dd>				
+                <dd>
+                    <a href="@routes.Application.logout()">Logout</a>
+                </dd>
+            </dl>
+				}			
+        </header>
+			@if((user.username != null) && (user != null)) {			
+			<nav>			
+				<h4 class="dashboard"><a href="/">Dashboard</a></h4>
+			@if((user.user_type != "NewUser") && (user.user_type != "Patient")) {				
+				<h4 class="users"><a href="/users">Users</a></h4>	
+				<h4 class="users"><a href="/newusers">New Users</a></h4>					
+				<h4 class="doctors"><a href="/doctors">Doctors</a></h4>		
+				<h4 class="doctors"><a href="/nurses">Nurses</a></h4>						
+				<h4 class="patients"><a href="/patients">Patients</a></h4>	
+			}
+				<h4 class="exams"><a href="/exams">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/prescriptions">Prescriptions</a></h4>
+			</nav>
+			}		
+        <section @if((user.username == null) || (user == null)) { id="createAccount" } else { id="main" }>
+            @body
+        </section>
+    </body>
+</html>
+

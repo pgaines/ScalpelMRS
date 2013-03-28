@@ -1,0 +1,116 @@
+@(user: User, createAccountForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    Sign Up <small><a href="@routes.Users.editUser(user.id)">Or edit an existing user</a></small>
+}
+
+@main(user) {
+    
+    @helper.form(action = routes.CreateAccount.submitCreateAccount) {
+        
+        <fieldset class="createAccount">
+            <legend>Account information</legend>
+ 
+			<div class="clearfix  " id="id_field">
+				<label for="id">ID</label>
+				<div class="input">					
+					@user.id
+					<span class="help-inline"></span>
+					<span class="help-block">This is the user id.</span> 
+				</div>
+			</div>
+ 
+            @inputText(
+                createAccountForm("username"), 
+                '_label -> "Name", 
+                '_help -> "Please choose a valid name.",
+                '_error -> createAccountForm.globalError
+            )
+            
+            @inputText(
+                createAccountForm("email"), '_label -> "Email",
+                '_help -> "Enter a valid email address."
+            )
+            
+            @inputPassword(
+                createAccountForm("password"), 
+                '_label -> "Password",
+                '_help -> "A password must be at least 6 characters. "
+            )
+            
+            @inputPassword(
+                createAccountForm("repeatPassword"), 
+                '_label -> "Repeat password",
+                '_help -> "Please repeat your password again.",
+                '_error -> createAccountForm.error("password")
+            )
+			
+            @select(
+                createAccountForm("user_type"), 
+                options = options(UserTypes.list),
+                '_default -> "--- Choose a User Type ---",
+                '_label -> "User type",
+                '_error -> createAccountForm("user_type").error.map(_.withMessage("Please select a user type"))
+            )  			
+            
+        </fieldset>
+        
+        <fieldset class="createAccount">
+            
+            <legend>Contact information</legend>
+ 
+            @inputText(
+                createAccountForm("phone"), '_label -> "Phone",
+                '_help -> "Enter a valid phone number."
+            )
+
+            @textarea(
+                createAccountForm("address"), 
+                '_label -> "Address", 'cols -> 50
+            )
+			
+            @inputText(
+                createAccountForm("city"), '_label -> "City"
+            )		
+ 
+            @inputText(
+                createAccountForm("state_"), '_label -> "State"
+            )		
+            
+            @select(
+                createAccountForm("country"), 
+                options = options(Countries.list),
+                '_default -> "--- Choose a country ---",
+                '_label -> "Country",
+                '_error -> createAccountForm("country").error.map(_.withMessage("Please select your country"))
+            )        
+            
+            @inputText(
+                createAccountForm("age"), 
+                '_label -> "Age", 'class -> "mini",
+                '_showConstraints -> false
+            )
+              
+        </fieldset>
+		@if((user.username == null) && (user == null)) {	       
+        <fieldset class="createAccount">
+            
+            @checkbox(
+                createAccountForm("accept"), 
+                '_label -> None, '_text -> "You agree the Terms and conditions",
+                '_showConstraints -> false
+            )
+            
+        </fieldset>
+        }
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Submit">
+            <a href="@routes.Users.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

@@ -1,0 +1,44 @@
+@(user: User, prescription: Prescription)
+
+@main(user) {
+ 
+<section id="summary"> 
+    <h2>Prescription Created!</h2>
+    
+    <h6>Patient Name</h6>
+    
+    <p>
+        @prescription.patientName
+    </p>
+    
+    <h6>Staff Name</h6>
+    
+    <p>
+        @prescription.staffName
+    </p>
+    
+    <h6>Medication Name</h6>
+    
+    <p>
+        @prescription.medicationName
+    </p>
+	
+    <h6>Dosage in Milligrams</h6>
+    
+    <p>
+        @prescription.dosage
+    </p>	
+	
+    <h6>Frequency</h6>
+    
+    <p>
+        @prescription.frequency
+    </p>	
+	
+    <h6>End Date</h6>
+	
+    <p>
+        @prescription.endDate
+    </p>	
+ </section>   
+}

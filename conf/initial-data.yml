@@ -1,0 +1,135 @@
+
+# Users
+
+users:
+
+    - !!models.User  
+        id:         1
+        email:      jdorian@scalpelmrs.com
+        username:       John Dorian
+        password:   secret
+        user_type:  Doctor
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+    
+    - !!models.User
+        id:         2   
+        email:      pcox@scalpelmrs.com
+        username:       Percy Cox
+        password:   secret
+        user_type:  Doctor
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+    
+    
+    - !!models.User 
+        id:         3   
+        email:      chris.turk@scalpelmrs.com
+        username:       Chris Turk
+        password:   secret
+        user_type:  Doctor
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+    
+    
+    - !!models.User
+        id:         4   
+        email:      carla.turk@scalpelmrs.com
+        username:       Carla Turk
+        user_type:  Nurse
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+
+        
+    - !!models.User 
+        id:         5   
+        email:      sroberts@scalpelmrs.com
+        username:       Shirley Roberts
+        password:   secret
+        user_type:  Nurse
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+
+
+    - !!models.User
+        id:         6   
+        email:      tisdale@scalpelmrs.com
+        username:       Nurse Tisdale
+        password:   secret   
+        user_type:  Nurse       
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+        
+    - !!models.User
+        id:         7   
+        email:      bfraser@scalpelmrs.com
+        username:       Brendan Fraser
+        password:   secret   
+        user_type:  Patient  
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+
+    - !!models.User
+        id:         8   
+        email:      jtracey@scalpelmrs.com
+        username:       Jill Tracey
+        password:   secret   
+        user_type:  Patient     
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30
+
+    - !!models.User
+        id:         9   
+        email:      hcorman@scalpelmrs.com
+        username:       Harvey Corman
+        password:   secret   
+        user_type:  Patient     
+        phone:      123-456-7890
+        address: 1234 Round St.     
+        city:       Boston
+        state_:     Massachusetts
+        country:  United States
+        age: 30     
+        
+prescriptions:  
+
+    - !!models.Prescription
+        id:         1
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        medicationName:  Ibuprofin
+        dosage:          50
+        frequency:       24
+        endDate:         2013-03-25         

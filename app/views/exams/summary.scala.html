@@ -1,0 +1,56 @@
+@(user: User, exam: Exam)
+
+@main(user) {
+ 
+<section id="summary"> 
+    <h2>Exam Created!</h2>
+    
+    <h6>Patient Name</h6>
+    
+    <p>
+        @exam.patientName
+    </p>
+    
+    <h6>Staff Name</h6>
+    
+    <p>
+        @exam.staffName
+    </p>
+    
+    <h6>Systolic (mm Hg)</h6>
+    
+    <p>
+        @exam.systolic
+    </p>
+	
+    <h6>Diastolic (mm Hg)</h6>
+    
+    <p>
+        @exam.diastolic
+    </p>	
+	
+    <h6>Blood Sugar (mg/dL)</h6>
+    
+    <p>
+        @exam.bloodSugar
+    </p>	
+	
+    <h6>Weight (lbs)</h6>
+    
+    <p>
+        @exam.weight
+    </p>	
+	
+    <h6>Height (inches)</h6>
+    
+    <p>
+        @exam.height
+    </p>	
+	
+    <h6>Date</h6>
+	
+    <p>
+        @exam.date
+    </p>	
+ </section>   
+}

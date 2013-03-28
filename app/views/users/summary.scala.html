@@ -1,0 +1,90 @@
+@(user: User)
+
+@main(user) {
+ 
+<section id="summary"> 
+    <h2>Your account:</h2>
+    
+    <h6>Username</h6>
+    
+    <p>
+        @user.username
+    </p>
+    
+    <h6>Email</h6>
+    
+    <p>
+        @user.email
+    </p>
+    
+    <h6>Password</h6>
+    
+    <p>
+        hidden
+    </p>
+	
+    <h6>User Type</h6>
+    
+    <p>
+        @user.user_type
+    </p>	
+    
+    <h2>Additional information:</h2>
+	
+    <h6>Phone</h6>
+    
+    <p>
+        @user.phone
+    </p>	
+	
+    <h6>Address</h6>
+    
+    <p>
+        @if(user.address == null || user.address == "") {
+            <em>Not specified</em>
+        } else {
+            @user.address
+        }
+    </p>	
+	
+    <h6>City</h6>
+    
+    <p>
+        @if(user.city == null || user.city == "") {
+            <em>Not specified</em>
+        } else {
+            @user.city
+        }
+    </p>
+
+	<h6>State</h6>
+    
+    <p>
+        @if(user.state_ == null || user.state_ == "") {
+            <em>Not specified</em>
+        } else {
+            @user.state_
+        }
+    </p>	
+    
+    <h6>Country</h6>
+    
+    <p>
+        @if(user.country == null || user.country == "") {
+            <em>Not specified</em>
+        } else {
+            @user.country
+        }
+    </p>
+    
+    <h6>Age</h6>
+    
+    <p>
+        @if(user.age == null) {
+            <em>Not specified</em>
+        } else {
+            @user.age
+        }
+    </p>
+ </section>   
+}

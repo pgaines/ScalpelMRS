@@ -1,0 +1,51 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# The home page
+GET     /                                   controllers.Users.index()
+
+# Authentication
+GET     /login                              controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+GET     /logout                             controllers.Application.logout()
+
+# Signup
+GET     /createAccount                             controllers.CreateAccount.createAccount()
+POST    /createAccount                             controllers.CreateAccount.submitCreateAccount()
+
+# Users list (look at the default values for pagination parameters)
+GET     /users                              controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "", i ?= "username")
+
+# Users
+GET     /summary                            controllers.Users.summary()
+GET     /editAccount                        controllers.Users.editAccount()
+GET     /editUser/:id                       controllers.Users.editUser(id:Integer)
+
+# Users list by User Type (look at the default values for pagination parameters)
+GET     /doctors                            controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "Doctor", i ?= "user_type")
+GET     /nurses                             controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "Nurse", i ?= "user_type")
+GET     /patients                           controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "Patient", i ?= "user_type")
+GET     /newusers                           controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "NewUser", i ?= "user_type")
+
+# Prescription list (look at the default values for pagination parameters)
+GET		/prescriptions       			     controllers.Prescriptions.index()
+GET     /prescriptions/patients              controllers.Prescriptions.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "", i ?= "patientName")
+GET		/prescriptions/staff                 controllers.Prescriptions.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "", i ?= "staffName")
+GET     /createPrescription                  controllers.Prescriptions.createPrescription()
+GET     /editPrescription/:id                controllers.Prescriptions.editPrescription(id:Integer)
+POST    /createPrescription                  controllers.Prescriptions.submitCreatePrescription()
+
+# Exam list (look at the default values for pagination parameters)
+GET		/exams       			     controllers.Exams.index()
+GET     /exams/patients              controllers.Exams.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "", i ?= "patientName")
+GET		/exams/staff                 controllers.Exams.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "", i ?= "staffName")
+GET     /createExam                  controllers.Exams.createExam()
+GET     /editExam/:id                controllers.Exams.editExam(id:Integer)
+POST    /createExam                  controllers.Exams.submitCreateExam()
+
+# Javascript routing
+#GET     /assets/javascripts/routes          controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /public path
+GET     /assets/*file                       controllers.Assets.at(path="/public", file)

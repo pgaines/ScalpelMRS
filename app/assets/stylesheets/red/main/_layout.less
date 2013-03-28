@@ -1,0 +1,127 @@
+// -----------------------------------
+// MAIN LAYOUT
+// -----------------------------------
+// author: mda@zenexity.com - 2011
+// -----------------------------------
+
+body {
+    & > header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: @headerHeight;
+    }
+    & > nav {
+        position: absolute;
+        top: @headerMargin;
+        left: 0;
+        width: @drawerWidth;
+        bottom: 0;
+        box-sizing: border-box;
+		height: 936px;
+    }
+    & > section {
+        position: absolute;
+        top: @headerMargin;
+        left: @drawerWidth;
+        right: 0;
+        bottom: 0;
+		height: 100%;
+    }
+}
+
+#createAccount {
+	top: 80px;
+	left: 0;
+}
+
+.createAccount {
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#summary {
+	padding: 10px;
+	padding-left: 50px;
+}
+
+#summary h2 {
+	line-height: 50px;
+}
+
+#list {
+	padding: 15px;
+	padding-left: 30px;
+}
+
+#main > header {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    right: 0;
+    height: @breadcrumbHeight;
+}
+
+#main > article {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    overflow: auto;
+}
+
+#main > .userForm {
+    position: absolute;
+    top: 40px;
+    left: 1px;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+#main > .deleteUser {
+    position: absolute;
+	top: 60px;
+	right: 20px;
+}
+
+table.users {
+    top: 12px;
+}
+
+table.users em {
+    color: #aaa;
+}
+
+table.users .header a {
+}
+
+#actions {
+    position: relative;
+}
+
+#actions #add {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#pagination {
+    position: relative;
+}
+
+#pagination ul {
+    position: absolute;
+    right: 0;
+}
+
+#pagination ul .current a {
+    color: #666;
+}
+
+

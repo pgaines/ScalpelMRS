@@ -1,0 +1,178 @@
+@(user: User, currentPage: com.avaje.ebean.Page[Exam], currentSortBy: String, currentOrder: String, currentFilter: String, currentFilterable: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.Exams.list(newPage, sortBy, order, currentFilter, currentFilterable)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main(user) {
+
+<section id="list">
+    
+    <h1 id="homeTitle">@Messages("exams.list.title", currentPage.getTotalRowCount)</h1>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    } 
+
+    <div id="actions">
+        
+        <form action="@link(0, "patientName")" method="GET">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by @currentFilterable...">
+            <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
+        </form>
+        
+        <a class="btn success" id="add" href="@routes.Exams.createExam()">Add a new exam</a>
+        
+    </div>
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="users zebra-striped">
+            <thead>
+                <tr>
+                    @header("id", "ID")				
+                    @header("patientName", "Patient Name")
+                    @header("staffName", "Staff Name")
+                    @header("systolic", "Systolic")					
+                    @header("diastolic", "Diastolic")
+                    @header("bloodSugar", "Blood Sugar")
+                    @header("weight", "Weight in lbs")
+                    @header("height", "Height in inches")					
+                    @header("date", "Date")				
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(exam <- currentPage.getList) {
+                    <tr>
+                        <td><a href="@routes.Exams.editExam(exam.id)">@exam.id</a></td>
+                        <td>
+                            @if(exam.patientName == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.patientName
+                            }
+                        </td>
+                        <td>
+                            @if(exam.staffName == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.staffName
+                            }
+                        </td>
+                        <td>
+                            @if(exam.systolic == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.systolic
+                            }
+                        </td>						
+                        <td>
+                            @if(exam.diastolic == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.diastolic
+                            }
+                        </td>
+                        <td>
+                            @if(exam.bloodSugar == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.bloodSugar
+                            }
+                        </td>
+                        <td>
+                            @if(exam.weight == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.weight
+                            }
+                        </td>	
+                        <td>
+                            @if(exam.height == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.height
+                            }
+                        </td>							
+                        <td>
+                            @if(exam.date == null) {
+                                <em>-</em>
+                            } else {
+                                @exam.date
+                            }
+                        </td>				
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul>
+                @if(currentPage.hasPrev) {
+                    <li class="prev">
+                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>
+                    </li>
+                } else {
+                    <li class="prev disabled">
+                        <a>&larr; Previous</a>
+                    </li>
+                }
+                <li class="current">
+                    <a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a>
+                </li>
+                @if(currentPage.hasNext) {
+                    <li class="next">
+                        <a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a>
+                    </li>
+                } else {
+                    <li class="next disabled">
+                        <a>Next &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    }
+</section>       
+}
