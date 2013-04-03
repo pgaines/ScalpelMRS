@@ -26,7 +26,7 @@ public class Prescriptions extends Controller {
      * This result directly redirect to application home. Pulls a list of prescriptions filtered by prescriptionname.
      */
     public static Result GO_HOME = redirect(
-        routes.Prescriptions.list(0, "patientName", "asc", "", "patientName")
+        routes.Prescriptions.list(0, "id", "asc", "", "patientName")
     );
     
     /**

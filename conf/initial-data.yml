@@ -132,4 +132,13 @@ prescriptions:
         medicationName:  Ibuprofin
         dosage:          50
         frequency:       24
-        endDate:         2013-03-25         
+        endDate:         2013-03-25        
+
+    - !!models.Prescription
+        id:         2
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        medicationName:  Motrin
+        dosage:          75
+        frequency:       24
+        endDate:         2013-03-25    		

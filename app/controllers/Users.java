@@ -30,7 +30,7 @@ public class Users extends Controller {
     );
     
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to users list
      */
     public static Result index() {
         return GO_HOME;
