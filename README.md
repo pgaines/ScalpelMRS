@@ -54,4 +54,4 @@ An explanation of the steps I followed to create the ScalpelMRS project. You don
 	* I go back to Github for Windows, click 'pgaines' under 'github', and click the blue arrow to 'open this repo'.
 	* I make the initial ScalpelMRS commit to the public github at http://github.com/pgaines/ScalpelMRS .
 	* I click "publish".
-* Then continue by following the rest of the PlayFramework.com Java Guide here: http://www.playframework.com/documentation/2.1.0/JavaGuide1
+* Then continue by following the rest of the PlayFramework.com Java Guide.
