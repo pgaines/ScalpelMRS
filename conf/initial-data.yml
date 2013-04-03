@@ -123,6 +123,46 @@ users:
         country:  United States
         age: 30     
         
+
+# Exams
+
+exams:
+
+    - !!models.Exam
+        id:         1
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        systolic:         117
+        diastolic:         80
+        bloodSugar:       24
+        height:           68
+        weight:           160
+        date:         2013-03-20  
+        
+    - !!models.Exam
+        id:         2
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        systolic:         120
+        diastolic:         83
+        bloodSugar:       25
+        height:           68
+        weight:           162
+        date:         2013-03-20  
+
+    - !!models.Exam
+        id:         3
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        systolic:         115
+        diastolic:         78
+        bloodSugar:       23
+        height:           68
+        weight:           164
+        date:         2013-03-20        
+        
+#Prescriptions
+        
 prescriptions:  
 
     - !!models.Prescription
@@ -136,9 +176,18 @@ prescriptions:
 
     - !!models.Prescription
         id:         2
-        patientName:    Brendan Fraser
+        patientName:    Harvey Corman
         staffName:      John Dorian
         medicationName:  Motrin
         dosage:          75
+        frequency:       12
+        endDate:         2013-03-28        
+
+    - !!models.Prescription
+        id:         3
+        patientName:    Brendan Fraser
+        staffName:      John Dorian
+        medicationName:  Vicodin
+        dosage:          20
         frequency:       24
-        endDate:         2013-03-25    		
+        endDate:         2013-03-29         

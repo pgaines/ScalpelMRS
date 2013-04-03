@@ -30,7 +30,7 @@ public class Prescriptions extends Controller {
     );
     
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to prescriptions list
      */
     public static Result index() {
         return GO_HOME;
