@@ -22,6 +22,8 @@ public class Global extends GlobalSettings {
 
                 // Insert users first
                 Ebean.save(all.get("users"));
+                Ebean.save(all.get("exams"));				
+                Ebean.save(all.get("prescriptions"));				
 
             }
         }
