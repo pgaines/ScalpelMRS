@@ -20,7 +20,7 @@ public class Users extends Controller {
    /**
      * Defines a form wrapping the User class.
      */ 
-    final static Form<User> editAccountForm = form(User.class, User.All.class);
+    final static Form<User> editUserForm = form(User.class, User.All.class);
  
     /**
      * This result directly redirect to application home. Pulls a list of users filtered by username.
@@ -39,10 +39,10 @@ public class Users extends Controller {
     /**
      * Display the user's account summary
      */  
-    public static Result summary() {
+    public static Result summary(Integer id) {
         return ok(
             summary.render(
-                User.findByEmail(request().username())
+			    User.findById(id)				
             )
         );
     }   
@@ -64,28 +64,16 @@ public class Users extends Controller {
                 sortBy, order, filter, filterable
             )
         );
-    }   
-
-    /**
-     * Display a form pre-filled with the current user's existing account.
-     */
-    public static Result editAccount() {    
-        return ok(
-            form.render(
-                User.findByEmail(request().username()),
-                editAccountForm.fill(User.findByEmail(request().username()))
-            )
-        );  
-    }   
+    }    
     
     /**
-     * Display a form pre-filled with another user's existing account.
+     * Display a form pre-filled with a user's existing account.
      */
     public static Result editUser(Integer id) { 
         return ok(
             form.render(
                 User.findById(id),
-                editAccountForm.fill(User.findById(id))
+                editUserForm.fill(User.findById(id))
             )
         );  
     }   
@@ -96,7 +84,7 @@ public class Users extends Controller {
      * @param id Id of the user to edit
      */
     public static Result updateUser(Integer id) {
-       Form<User> filledForm = editAccountForm.bindFromRequest();
+       Form<User> filledForm = editUserForm.bindFromRequest();
               
         // Check repeated password
         if(!filledForm.field("password").valueOr("").isEmpty()) {

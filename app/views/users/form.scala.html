@@ -4,7 +4,7 @@
 @import helper.twitterBootstrap._
 
 @title = {
-    Sign Up <small><a href="@routes.Users.editUser(user.id)">Or edit an existing user</a></small>
+    Sign Up <small><a href="/editUser/@user.id">Or edit an existing user</a></small>
 }
 
 @main(user) {
@@ -97,7 +97,7 @@
         </fieldset>
         <div class="actions">
             <input type="submit" class="btn primary" value="Submit">
-            <a href="@routes.Users.index" class="btn">Cancel</a>
+            <a href="/" class="btn">Cancel</a>
         </div>
         
     }

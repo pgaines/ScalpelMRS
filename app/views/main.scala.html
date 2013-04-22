@@ -11,22 +11,23 @@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/underscore-min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/backbone-min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/flot/jquery.flot.js")"></script>		
 
     </head>
     <body>
         <header>
-            <a href="@routes.Users.index()" id="logo"><span>Scalpel</span>MRS</a>
+            <a href="/" id="logo"><span>Scalpel</span>MRS</a>
             <dl id="user">
 				@if((user.username != null) && (user != null)) {			
                 <dt>@user.username <span>(@user.email)</span></dt>			
                 <dd>
-                    <a href="@routes.Users.editAccount()">Edit Account</a>
+                    <a href="/editUser/@user.id">Edit Account</a>
                 </dd>	
                 <dd>
-                    <a href="@routes.Users.summary()">Account Summary</a>
+                    <a href="/summary/@user.id">Account Summary</a>
                 </dd>				
                 <dd>
-                    <a href="@routes.Application.logout()">Logout</a>
+                    <a href="/logout">Logout</a>
                 </dd>
             </dl>
 				}			

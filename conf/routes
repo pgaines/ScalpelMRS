@@ -3,7 +3,7 @@
 # ~~~~
 
 # The home page
-GET     /                                   controllers.Users.index()
+GET     /                                   controllers.Dashboard.dashboard()
 
 # Authentication
 GET     /login                              controllers.Application.login()
@@ -18,8 +18,7 @@ POST    /createAccount                             controllers.CreateAccount.sub
 GET     /users                              controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "", i ?= "username")
 
 # Users
-GET     /summary                            controllers.Users.summary()
-GET     /editAccount                        controllers.Users.editAccount()
+GET     /summary/:id                            controllers.Users.summary(id:Integer)
 GET     /editUser/:id                       controllers.Users.editUser(id:Integer)
 GET     /deleteUser/:id                     controllers.Users.deleteUser(id:Integer)
 POST    /updateUser/:id                         controllers.Users.updateUser(id: Integer)

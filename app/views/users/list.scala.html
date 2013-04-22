@@ -86,9 +86,9 @@
                 @for(user <- currentPage.getList) {
                     <tr>
                         <td>
-                            <span><a href="@routes.Users.editUser(user.id)">edit</a></span>
-                            <span><a href="@routes.Users.deleteUser(user.id)">delete</a></span>
-                            <span>@user.id</span>                           
+                            <span><a href="/deleteUser/@user.id">delete</a></span>						
+                            <span><a href="/editUser/@user.id">edit</a></span>
+                            <span><a href="/summary/@user.id">@user.id</a></span>                           
                         </td>
                         <td>
                             @if(user.username == null) {
