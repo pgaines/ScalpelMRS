@@ -69,22 +69,26 @@
         <table class="users zebra-striped">
             <thead>
                 <tr>
-                    @header("id", "ID")				
+                    @header("id", "ID")             
                     @header("patientName", "Patient Name")
                     @header("staffName", "Staff Name")
-                    @header("systolic", "Systolic")					
+                    @header("systolic", "Systolic")                 
                     @header("diastolic", "Diastolic")
                     @header("bloodSugar", "Blood Sugar")
                     @header("weight", "Weight in lbs")
-                    @header("height", "Height in inches")					
-                    @header("date", "Date")				
+                    @header("height", "Height in inches")                   
+                    @header("date", "Date")             
                 </tr>
             </thead>
             <tbody>
 
                 @for(exam <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Exams.editExam(exam.id)">@exam.id</a></td>
+                        <td>
+                            <span><a href="@routes.Exams.editExam(exam.id)">edit</a></span>
+                            <span><a href="@routes.Exams.deleteExam(exam.id)">delete</a></span>
+                            <span>@exam.id</span>                                                   
+                        </td>
                         <td>
                             @if(exam.patientName == null) {
                                 <em>-</em>
@@ -105,7 +109,7 @@
                             } else {
                                 @exam.systolic
                             }
-                        </td>						
+                        </td>                       
                         <td>
                             @if(exam.diastolic == null) {
                                 <em>-</em>
@@ -126,21 +130,21 @@
                             } else {
                                 @exam.weight
                             }
-                        </td>	
+                        </td>   
                         <td>
                             @if(exam.height == null) {
                                 <em>-</em>
                             } else {
                                 @exam.height
                             }
-                        </td>							
+                        </td>                           
                         <td>
                             @if(exam.date == null) {
                                 <em>-</em>
                             } else {
                                 @exam.date
                             }
-                        </td>				
+                        </td>               
                     </tr>
                 }
 

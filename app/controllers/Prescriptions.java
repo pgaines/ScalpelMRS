@@ -86,7 +86,7 @@ public class Prescriptions extends Controller {
     public static Result createPrescription() {
         Prescription emptyPrescription = Prescription.emptyPrescription();  
         return ok(
-            form.render(
+            create_prescription_form.render(
                 User.findByEmail(request().username()),             
                 emptyPrescription,
                 createPrescriptionForm.fill(emptyPrescription)
@@ -104,9 +104,35 @@ public class Prescriptions extends Controller {
             Prescription emptyPrescription = Prescription.emptyPrescription();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyPrescription, filledForm));
         } else {
+            filledForm.get().save();		
             Prescription created = filledForm.get();
             return ok(summary.render(User.findByEmail(request().username()), created));
         }
     }       
+	
+    /**
+     * Handle the form submission for editPrescription.
+     */
+    public static Result updatePrescription(Integer id) {
+        Form<Prescription> filledForm = createPrescriptionForm.bindFromRequest();
+        
+        if(filledForm.hasErrors()) {
+            Prescription emptyPrescription = Prescription.emptyPrescription();      
+            return badRequest(form.render(User.findByEmail(request().username()), emptyPrescription, filledForm));
+        } else {
+			filledForm.get().update(id);
+			flash("success", "Prescription has been updated");
+			return GO_HOME;
+        }
+    }     	
+	
+    /**
+     * Handle prescription deletion
+     */
+    public static Result deletePrescription(Integer id) {
+        Prescription.findById(id).delete();
+        flash("success", "Prescription has been deleted");
+        return GO_HOME;
+    }			
 }
 

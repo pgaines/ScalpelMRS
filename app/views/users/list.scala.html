@@ -69,23 +69,27 @@
         <table class="users zebra-striped">
             <thead>
                 <tr>
-                    @header("id", "ID")				
+                    @header("id", "ID")             
                     @header("username", "User name")
                     @header("email", "Email Address")
-                    @header("phone", "Phone Number")					
+                    @header("phone", "Phone Number")                    
                     @header("user_type", "User Type")
-                    @header("address", "Address")	
+                    @header("address", "Address")   
                     @header("city", "City")
                     @header("state_", "State")
-                    @header("country", "Country")					
-                    @header("age", "Age")					
+                    @header("country", "Country")                   
+                    @header("age", "Age")                           
                 </tr>
             </thead>
             <tbody>
 
                 @for(user <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Users.editUser(user.id)">@user.id</a></td>
+                        <td>
+                            <span><a href="@routes.Users.editUser(user.id)">edit</a></span>
+                            <span><a href="@routes.Users.deleteUser(user.id)">delete</a></span>
+                            <span>@user.id</span>                           
+                        </td>
                         <td>
                             @if(user.username == null) {
                                 <em>-</em>
@@ -106,7 +110,7 @@
                             } else {
                                 @user.phone
                             }
-                        </td>						
+                        </td>                       
                         <td>
                             @if(user.user_type == null) {
                                 <em>-</em>
@@ -120,35 +124,35 @@
                             } else {
                                 @user.address
                             }
-                        </td>	
+                        </td>   
                         <td>
                             @if(user.city == null) {
                                 <em>-</em>
                             } else {
                                 @user.city
                             }
-                        </td>				
+                        </td>               
                         <td>
                             @if(user.state_ == null) {
                                 <em>-</em>
                             } else {
                                 @user.state_
                             }
-                        </td>	
+                        </td>   
                         <td>
                             @if(user.country == null) {
                                 <em>-</em>
                             } else {
                                 @user.country
                             }
-                        </td>				
+                        </td>               
                         <td>
                             @if(user.age == null) {
                                 <em>-</em>
                             } else {
                                 @user.age
                             }
-                        </td>						
+                        </td>                       
                     </tr>
                 }
 

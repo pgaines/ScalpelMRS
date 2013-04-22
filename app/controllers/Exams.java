@@ -86,7 +86,7 @@ public class Exams extends Controller {
     public static Result createExam() {
         Exam emptyExam = Exam.emptyExam();  
         return ok(
-            form.render(
+            create_exam_form.render(
                 User.findByEmail(request().username()),             
                 emptyExam,
                 createExamForm.fill(emptyExam)
@@ -95,7 +95,7 @@ public class Exams extends Controller {
     }   
 
     /**
-     * Handle the form submission.
+     * Handle the create exam form submission.
      */
     public static Result submitCreateExam() {
         Form<Exam> filledForm = createExamForm.bindFromRequest();
@@ -104,9 +104,36 @@ public class Exams extends Controller {
             Exam emptyExam = Exam.emptyExam();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
         } else {
+            filledForm.get().save();		
             Exam created = filledForm.get();
             return ok(summary.render(User.findByEmail(request().username()), created));
         }
-    }       
+    }    
+
+	
+    /**
+     * Handle the form submission for editExam.
+     */
+    public static Result updateExam(Integer id) {
+        Form<Exam> filledForm = createExamForm.bindFromRequest();
+        
+        if(filledForm.hasErrors()) {
+            Exam emptyExam = Exam.emptyExam();      
+            return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
+        } else {
+			filledForm.get().update(id);
+			flash("success", "Exam has been updated");
+			return GO_HOME;
+        }
+    }   		
+	
+    /**
+     * Handle exam deletion
+     */
+    public static Result deleteExam(Integer id) {
+        Exam.findById(id).delete();
+        flash("success", "Exam has been deleted");
+        return GO_HOME;
+    }		
 }
 

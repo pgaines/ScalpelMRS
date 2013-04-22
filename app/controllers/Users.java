@@ -20,7 +20,7 @@ public class Users extends Controller {
    /**
      * Defines a form wrapping the User class.
      */ 
-    final static Form<User> createAccountForm = form(User.class, User.All.class);
+    final static Form<User> editAccountForm = form(User.class, User.All.class);
  
     /**
      * This result directly redirect to application home. Pulls a list of users filtered by username.
@@ -73,7 +73,7 @@ public class Users extends Controller {
         return ok(
             form.render(
                 User.findByEmail(request().username()),
-                createAccountForm.fill(User.findByEmail(request().username()))
+                editAccountForm.fill(User.findByEmail(request().username()))
             )
         );  
     }   
@@ -85,9 +85,50 @@ public class Users extends Controller {
         return ok(
             form.render(
                 User.findById(id),
-                createAccountForm.fill(User.findById(id))
+                editAccountForm.fill(User.findById(id))
             )
         );  
     }   
+	
+    /**
+     * Handle the 'edit form' submission 
+     *
+     * @param id Id of the user to edit
+     */
+    public static Result updateUser(Integer id) {
+       Form<User> filledForm = editAccountForm.bindFromRequest();
+              
+        // Check repeated password
+        if(!filledForm.field("password").valueOr("").isEmpty()) {
+            if(!filledForm.field("password").valueOr("").equals(filledForm.field("repeatPassword").value())) {
+                filledForm.reject("repeatPassword", "Password don't match");
+            }
+        }
+        
+        // Check if the username is valid
+        if(!filledForm.hasErrors()) {
+            if(filledForm.get().username.equals("admin") || filledForm.get().username.equals("guest")) {
+                filledForm.reject("username", "This username is already taken");
+            }
+        }
+        
+        if(filledForm.hasErrors()) {
+			User emptyUser = User.emptyUser();		
+            return badRequest(form.render(emptyUser, filledForm));
+        } else {
+			filledForm.get().update(id);
+        flash("success", "User has been updated");
+        return GO_HOME;
+        }	
+    }	
+    
+    /**
+     * Handle user deletion
+     */
+    public static Result deleteUser(Integer id) {
+        User.findById(id).delete();
+        flash("success", "User has been deleted");
+        return GO_HOME;
+    }	
 }
 

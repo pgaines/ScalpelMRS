@@ -21,14 +21,14 @@ public class CreateAccount extends Controller {
      * Display a blank createAccount form.
      */ 
     public static Result createAccount() {
-	    User emptyUser = User.emptyUser();	
-		return ok(
-			form.render(
-				emptyUser,
-				createAccountForm.fill(emptyUser)
-			)
-		);	
-    }	
+        User emptyUser = User.emptyUser();  
+        return ok(
+            create_account_form.render(
+                emptyUser,
+                createAccountForm.fill(emptyUser)
+            )
+        );  
+    }   
 
     /**
      * Handle the form submission.
@@ -56,11 +56,12 @@ public class CreateAccount extends Controller {
         }
         
         if(filledForm.hasErrors()) {
-			User emptyUser = User.emptyUser();		
-            return badRequest(form.render(emptyUser, filledForm));
+            User emptyUser = User.emptyUser();      
+            return badRequest(create_account_form.render(emptyUser, filledForm));
         } else {
+            filledForm.get().save();
             User created = filledForm.get();
             return ok(summary.render(created));
         }
-    }	
+    }   
 }

@@ -69,20 +69,24 @@
         <table class="users zebra-striped">
             <thead>
                 <tr>
-                    @header("id", "ID")				
+                    @header("id", "ID")             
                     @header("patientName", "Patient Name")
                     @header("staffName", "Staff Name")
-                    @header("medicationName", "Medication Name")					
+                    @header("medicationName", "Medication Name")                    
                     @header("dosage", "Dosage in milligrams")
-                    @header("frequency", "Frequency in hours")	
-                    @header("endDate", "End Date")				
+                    @header("frequency", "Frequency in hours")  
+                    @header("endDate", "End Date")              
                 </tr>
             </thead>
             <tbody>
 
                 @for(prescription <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Prescriptions.editPrescription(prescription.id)">@prescription.id</a></td>
+                        <td>
+                            <span><a href="@routes.Prescriptions.editPrescription(prescription.id)">edit</a></span>
+                            <span><a href="@routes.Prescriptions.deletePrescription(prescription.id)">delete</a></span>
+                            <span>@prescription.id</span>                           
+                        </td>
                         <td>
                             @if(prescription.patientName == null) {
                                 <em>-</em>
@@ -103,7 +107,7 @@
                             } else {
                                 @prescription.medicationName
                             }
-                        </td>						
+                        </td>                       
                         <td>
                             @if(prescription.dosage == null) {
                                 <em>-</em>
@@ -117,14 +121,14 @@
                             } else {
                                 @prescription.frequency
                             }
-                        </td>	
+                        </td>   
                         <td>
                             @if(prescription.endDate == null) {
                                 <em>-</em>
                             } else {
                                 @prescription.endDate
                             }
-                        </td>				
+                        </td>               
                     </tr>
                 }
 

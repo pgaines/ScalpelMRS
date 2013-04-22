@@ -21,6 +21,8 @@ GET     /users                              controllers.Users.list(p:Int ?= 0, s
 GET     /summary                            controllers.Users.summary()
 GET     /editAccount                        controllers.Users.editAccount()
 GET     /editUser/:id                       controllers.Users.editUser(id:Integer)
+GET     /deleteUser/:id                     controllers.Users.deleteUser(id:Integer)
+POST    /updateUser/:id                         controllers.Users.updateUser(id: Integer)
 
 # Users list by User Type (look at the default values for pagination parameters)
 GET     /doctors                            controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "Doctor", i ?= "user_type")
@@ -35,6 +37,8 @@ GET		/prescriptions/staff                 controllers.Prescriptions.list(p:Int ?
 GET     /createPrescription                  controllers.Prescriptions.createPrescription()
 GET     /editPrescription/:id                controllers.Prescriptions.editPrescription(id:Integer)
 POST    /createPrescription                  controllers.Prescriptions.submitCreatePrescription()
+GET     /deletePrescription/:id              controllers.Prescriptions.deletePrescription(id:Integer)
+POST    /updatePrescription/:id              controllers.Prescriptions.updatePrescription(id:Integer)
 
 # Exam list (look at the default values for pagination parameters)
 GET		/exams       			     controllers.Exams.index()
@@ -43,6 +47,8 @@ GET		/exams/staff                 controllers.Exams.list(p:Int ?= 0, s ?= "id", 
 GET     /createExam                  controllers.Exams.createExam()
 GET     /editExam/:id                controllers.Exams.editExam(id:Integer)
 POST    /createExam                  controllers.Exams.submitCreateExam()
+GET     /deleteExam/:id              controllers.Exams.deleteExam(id:Integer)
+POST    /updateExam/:id              controllers.Exams.updateExam(id:Integer)
 
 # Javascript routing
 #GET     /assets/javascripts/routes          controllers.Application.javascriptRoutes()
