@@ -54,7 +54,7 @@
             <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.CreateAccount.createAccount()">Add a new user</a>
+        <a class="btn success" id="add" href="/createUser/@(currentPage.getTotalRowCount + 1)">Add a new user</a>
         
     </div>
     
@@ -88,7 +88,7 @@
                         <td>
                             <span><a href="/deleteUser/@user.id">delete</a></span>						
                             <span><a href="/editUser/@user.id">edit</a></span>
-                            <span><a href="/summary/@user.id">@user.id</a></span>                           
+                            <span><a href="/viewUser/@user.id">@user.id</a></span>                           
                         </td>
                         <td>
                             @if(user.username == null) {

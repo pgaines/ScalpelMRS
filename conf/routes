@@ -11,17 +11,17 @@ POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout()
 
 # Signup
-GET     /createAccount                             controllers.CreateAccount.createAccount()
-POST    /createAccount                             controllers.CreateAccount.submitCreateAccount()
+GET     /createUser/:id                     controllers.CreateUser.createUser(id:Integer)
+POST    /createUser/:id                     controllers.CreateUser.submitCreateUser(id:Integer)
 
 # Users list (look at the default values for pagination parameters)
 GET     /users                              controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "", i ?= "username")
 
 # Users
-GET     /summary/:id                            controllers.Users.summary(id:Integer)
+GET     /viewUser/:id                       controllers.Users.viewUser(id:Integer)
 GET     /editUser/:id                       controllers.Users.editUser(id:Integer)
 GET     /deleteUser/:id                     controllers.Users.deleteUser(id:Integer)
-POST    /updateUser/:id                         controllers.Users.updateUser(id: Integer)
+POST    /updateUser/:userID/:updatedID      controllers.Users.updateUser(userID:Integer, updatedID:Integer)
 
 # Users list by User Type (look at the default values for pagination parameters)
 GET     /doctors                            controllers.Users.list(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "Doctor", i ?= "user_type")

@@ -1,20 +1,26 @@
-@(user: User)
+@(user: User, userForm: User)
 
 @main(user) {
  
 <section id="summary"> 
     <h2>Account information:</h2>
     
+    <h6>User ID</h6>
+    
+    <p>
+        @userForm.id
+    </p>	
+	
     <h6>Username</h6>
     
     <p>
-        @user.username
+        @userForm.username
     </p>
     
     <h6>Email</h6>
     
     <p>
-        @user.email
+        @userForm.email
     </p>
     
     <h6>Password</h6>
@@ -26,7 +32,7 @@
     <h6>User Type</h6>
     
     <p>
-        @user.user_type
+        @userForm.user_type
     </p>	
     
     <h2>Additional information:</h2>
@@ -34,56 +40,56 @@
     <h6>Phone</h6>
     
     <p>
-        @user.phone
+        @userForm.phone
     </p>	
 	
     <h6>Address</h6>
     
     <p>
-        @if(user.address == null || user.address == "") {
+        @if(userForm.address == null || userForm.address == "") {
             <em>Not specified</em>
         } else {
-            @user.address
+            @userForm.address
         }
     </p>	
 	
     <h6>City</h6>
     
     <p>
-        @if(user.city == null || user.city == "") {
+        @if(userForm.city == null || userForm.city == "") {
             <em>Not specified</em>
         } else {
-            @user.city
+            @userForm.city
         }
     </p>
 
 	<h6>State</h6>
     
     <p>
-        @if(user.state_ == null || user.state_ == "") {
+        @if(userForm.state_ == null || userForm.state_ == "") {
             <em>Not specified</em>
         } else {
-            @user.state_
+            @userForm.state_
         }
     </p>	
     
     <h6>Country</h6>
     
     <p>
-        @if(user.country == null || user.country == "") {
+        @if(userForm.country == null || userForm.country == "") {
             <em>Not specified</em>
         } else {
-            @user.country
+            @userForm.country
         }
     </p>
     
     <h6>Age</h6>
     
     <p>
-        @if(user.age == null) {
+        @if(userForm.age == null) {
             <em>Not specified</em>
         } else {
-            @user.age
+            @userForm.age
         }
     </p>
  </section>   

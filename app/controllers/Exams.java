@@ -35,18 +35,18 @@ public class Exams extends Controller {
     public static Result index() {
         return GO_HOME;
     }       
-	
+    
     /**
      * Display the exam summary
      */  
     public static Result summary(Exam exam) {
-		return ok(
-			summary.render(
-				User.findByEmail(request().username()),
-				exam
-			)
-		);
-	}		
+        return ok(
+            summary.render(
+                User.findByEmail(request().username()),
+                exam
+            )
+        );
+    }       
     
     /**
      * Display the paginated list of exams.
@@ -54,7 +54,7 @@ public class Exams extends Controller {
      * @param page Current page number (starts from 0)
      * @param sortBy Column to be sorted
      * @param order Sort order (either asc or desc)
-	 * @param filterable Exam property to which filter is applied	 
+     * @param filterable Exam property to which filter is applied    
      * @param filter Filter applied on Filterable
      */
     public static Result list(int page, String sortBy, String order, String filter, String filterable) {
@@ -98,35 +98,35 @@ public class Exams extends Controller {
      * Handle the create exam form submission.
      */
     public static Result submitCreateExam() {
-        Form<Exam> filledForm = createExamForm.bindFromRequest();
+        Form<Exam> filledForm = form(Exam.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Exam emptyExam = Exam.emptyExam();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
         } else {
-            filledForm.get().save();		
+            filledForm.get().save();        
             Exam created = filledForm.get();
             return ok(summary.render(User.findByEmail(request().username()), created));
         }
     }    
 
-	
+    
     /**
      * Handle the form submission for editExam.
      */
     public static Result updateExam(Integer id) {
-        Form<Exam> filledForm = createExamForm.bindFromRequest();
+        Form<Exam> filledForm = form(Exam.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Exam emptyExam = Exam.emptyExam();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
         } else {
-			filledForm.get().update(id);
-			flash("success", "Exam has been updated");
-			return GO_HOME;
+            filledForm.get().update(id);
+            flash("success", "Exam has been updated");
+            return GO_HOME;
         }
-    }   		
-	
+    }           
+    
     /**
      * Handle exam deletion
      */
@@ -134,6 +134,6 @@ public class Exams extends Controller {
         Exam.findById(id).delete();
         flash("success", "Exam has been deleted");
         return GO_HOME;
-    }		
+    }       
 }
 

@@ -73,18 +73,6 @@ public class User extends Model {
      * Generic query helper for entity User with email String
      */
     public static Finder<String,User> find = new Finder<String,User>(String.class, User.class); 
-
-
-	/**
-	 * Create an empty user
-	 */
-	 public static User emptyUser() {
-		Integer id = User.incrementId();	 
-	    User emptyUser = new User(
-            id, null, null, null, "NewUser", null, null, null, null, null, null
-        );
-		return emptyUser;
-	}
 	
     /**
      * Retrieve all users.
@@ -111,6 +99,17 @@ public class User extends Model {
                 .findPagingList(pageSize)
                 .getPage(page);
     }	
+	
+	/**
+	 * Create an empty user
+	 */
+	 public static User emptyUser() {
+		Integer id = User.incrementId();	 
+	    User emptyUser = new User(
+            id, null, null, null, "NewUser", null, null, null, null, null, null
+        );
+		return emptyUser;
+	}	
 
 	/**
      * Retrieve new id, incremented by 1 from row count of users.

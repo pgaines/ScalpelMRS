@@ -10,22 +10,22 @@ import models.*;
 import views.html.*;
 import views.html.users.*;
 
-public class CreateAccount extends Controller {
+public class CreateUser extends Controller {
     
     /**
      * Defines a form wrapping the User class.
      */ 
-    final static Form<User> createAccountForm = form(User.class, User.All.class);
+    final static Form<User> userForm = form(User.class, User.All.class);
 
     /**
-     * Display a blank createAccount form.
+     * Display a blank createUser form.
      */ 
-    public static Result createAccount() {
+    public static Result createUser(Integer id) {
         User emptyUser = User.emptyUser();  
         return ok(
-            create_account_form.render(
+            createUser.render(
                 emptyUser,
-                createAccountForm.fill(emptyUser)
+                userForm.fill(emptyUser)
             )
         );  
     }   
@@ -33,8 +33,8 @@ public class CreateAccount extends Controller {
     /**
      * Handle the form submission.
      */
-    public static Result submitCreateAccount() {
-        Form<User> filledForm = createAccountForm.bindFromRequest();
+    public static Result submitCreateUser() {
+        Form<User> filledForm = form(User.class, User.All.class).bindFromRequest();
         
         // Check accept conditions
         if(!"true".equals(filledForm.field("accept").value()) && (User.findByEmail(request().username()) != null)) {
@@ -57,11 +57,11 @@ public class CreateAccount extends Controller {
         
         if(filledForm.hasErrors()) {
             User emptyUser = User.emptyUser();      
-            return badRequest(create_account_form.render(emptyUser, filledForm));
+            return badRequest(createUser.render(emptyUser, filledForm));
         } else {
             filledForm.get().save();
             User created = filledForm.get();
-            return ok(summary.render(created));
+            return ok(viewUser.render(created, created));
         }
     }   
 }

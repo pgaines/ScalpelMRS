@@ -1,4 +1,4 @@
-@(user: User, createAccountForm: Form[User])
+@(user: User, userForm: Form[User])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -9,9 +9,9 @@
 
 @main(user) {
     
-    @helper.form(action = routes.CreateAccount.submitCreateAccount) {
+    @helper.form(action = routes.CreateUser.submitCreateUser) {
         
-        <fieldset class="createAccount">
+        <fieldset class="createUser">
             <legend>Account information</legend>
  
 			<div class="clearfix" id="id_field">
@@ -24,82 +24,82 @@
 			</div>
  
             @inputText(
-                createAccountForm("username"), 
+                userForm("username"), 
                 '_label -> "Name", 
                 '_help -> "Please choose a valid name.",
-                '_error -> createAccountForm.globalError
+                '_error -> userForm.globalError
             )
             
             @inputText(
-                createAccountForm("email"), '_label -> "Email",
+                userForm("email"), '_label -> "Email",
                 '_help -> "Enter a valid email address."
             )
             
             @inputPassword(
-                createAccountForm("password"), 
+                userForm("password"), 
                 '_label -> "Password",
                 '_help -> "A password must be at least 6 characters. "
             )
             
             @inputPassword(
-                createAccountForm("repeatPassword"), 
+                userForm("repeatPassword"), 
                 '_label -> "Repeat password",
                 '_help -> "Please repeat your password again.",
-                '_error -> createAccountForm.error("password")
+                '_error -> userForm.error("password")
             )
 			
             @select(
-                createAccountForm("user_type"), 
+                userForm("user_type"), 
                 options = options(UserTypes.list),
                 '_default -> "--- Choose a User Type ---",
                 '_label -> "User type",
-                '_error -> createAccountForm("user_type").error.map(_.withMessage("Please select a user type"))
+                '_error -> userForm("user_type").error.map(_.withMessage("Please select a user type"))
             )  			
             
         </fieldset>
         
-        <fieldset class="createAccount">
+        <fieldset class="createUser">
             
             <legend>Contact information</legend>
  
             @inputText(
-                createAccountForm("phone"), '_label -> "Phone",
+                userForm("phone"), '_label -> "Phone",
                 '_help -> "Enter a valid phone number."
             )
 
             @textarea(
-                createAccountForm("address"), 
+                userForm("address"), 
                 '_label -> "Address", 'cols -> 50
             )
 			
             @inputText(
-                createAccountForm("city"), '_label -> "City"
+                userForm("city"), '_label -> "City"
             )		
  
             @inputText(
-                createAccountForm("state_"), '_label -> "State"
+                userForm("state_"), '_label -> "State"
             )		
             
             @select(
-                createAccountForm("country"), 
+                userForm("country"), 
                 options = options(Countries.list),
                 '_default -> "--- Choose a country ---",
                 '_label -> "Country",
-                '_error -> createAccountForm("country").error.map(_.withMessage("Please select your country"))
+                '_error -> userForm("country").error.map(_.withMessage("Please select your country"))
             )        
             
             @inputText(
-                createAccountForm("age"), 
+                userForm("age"), 
                 '_label -> "Age", 'class -> "mini",
                 '_showConstraints -> false
             )
               
         </fieldset>
 		@if((user.username == null) && (user == null)) {	       
-        <fieldset class="createAccount">
+        <fieldset class="createUser">
             
             @checkbox(
-                createAccountForm("accept"), 
+                userForm("accept"), 
                 '_label -> None, '_text -> "You agree the Terms and conditions",
                 '_showConstraints -> false
             )

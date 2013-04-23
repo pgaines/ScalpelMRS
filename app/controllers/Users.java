@@ -20,7 +20,7 @@ public class Users extends Controller {
    /**
      * Defines a form wrapping the User class.
      */ 
-    final static Form<User> editUserForm = form(User.class, User.All.class);
+    final static Form<User> userForm = form(User.class, User.All.class);
  
     /**
      * This result directly redirect to application home. Pulls a list of users filtered by username.
@@ -35,18 +35,7 @@ public class Users extends Controller {
     public static Result index() {
         return GO_HOME;
     }       
-    
-    /**
-     * Display the user's account summary
-     */  
-    public static Result summary(Integer id) {
-        return ok(
-            summary.render(
-			    User.findById(id)				
-            )
-        );
-    }   
-    
+      
     /**
      * Display the paginated list of users.
      *
@@ -65,15 +54,28 @@ public class Users extends Controller {
             )
         );
     }    
+	
+    /**
+     * Display the user's account summary
+     */  
+    public static Result viewUser(Integer id) {
+        return ok(
+            viewUser.render(
+                User.findByEmail(request().username()), 
+                User.findById(id)				
+            )
+        );
+    }   	
     
     /**
      * Display a form pre-filled with a user's existing account.
      */
     public static Result editUser(Integer id) { 
         return ok(
-            form.render(
-                User.findById(id),
-                editUserForm.fill(User.findById(id))
+            editUser.render(
+                User.findByEmail(request().username()), 
+				User.findById(id),
+                userForm.fill(User.findById(id))
             )
         );  
     }   
@@ -83,8 +85,8 @@ public class Users extends Controller {
      *
      * @param id Id of the user to edit
      */
-    public static Result updateUser(Integer id) {
-       Form<User> filledForm = editUserForm.bindFromRequest();
+    public static Result updateUser(Integer userID, Integer updatedID) {
+       Form<User> filledForm = form(User.class, User.All.class).bindFromRequest();
               
         // Check repeated password
         if(!filledForm.field("password").valueOr("").isEmpty()) {
@@ -102,11 +104,12 @@ public class Users extends Controller {
         
         if(filledForm.hasErrors()) {
 			User emptyUser = User.emptyUser();		
-            return badRequest(form.render(emptyUser, filledForm));
+            return badRequest(editUser.render(emptyUser, emptyUser, filledForm));
         } else {
-			filledForm.get().update(id);
-        flash("success", "User has been updated");
-        return GO_HOME;
+			User updated = filledForm.get();
+			updated.update(updatedID);
+			flash("success", "User has been updated");
+			return ok(viewUser.render(User.findById(userID), updated));
         }	
     }	
     

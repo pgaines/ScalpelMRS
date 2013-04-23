@@ -98,7 +98,7 @@ public class Prescriptions extends Controller {
      * Handle the form submission.
      */
     public static Result submitCreatePrescription() {
-        Form<Prescription> filledForm = createPrescriptionForm.bindFromRequest();
+        Form<Prescription> filledForm = form(Prescription.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Prescription emptyPrescription = Prescription.emptyPrescription();      
@@ -114,7 +114,7 @@ public class Prescriptions extends Controller {
      * Handle the form submission for editPrescription.
      */
     public static Result updatePrescription(Integer id) {
-        Form<Prescription> filledForm = createPrescriptionForm.bindFromRequest();
+        Form<Prescription> filledForm = form(Prescription.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Prescription emptyPrescription = Prescription.emptyPrescription();      
