@@ -1,4 +1,4 @@
-@(user: User, updatedUser: User, userForm: Form[User])
+@(user: User, savedUser: User, userForm: Form[User])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -9,7 +9,7 @@
 
 @main(user) {
     
-    @helper.form(action = routes.Users.updateUser(user.id, updatedUser.id)) {
+    @helper.form(action = routes.Users.saveUser(user.id, savedUser.id)) {
         
         <fieldset class="editAccount">
             <legend>Account information</legend>	

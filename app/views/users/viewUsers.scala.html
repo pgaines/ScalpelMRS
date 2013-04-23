@@ -1,4 +1,4 @@
-@(user: User, currentPage: com.avaje.ebean.Page[Prescription], currentSortBy: String, currentOrder: String, currentFilter: String, currentFilterable: String)
+@(user: User, currentPage: com.avaje.ebean.Page[User], currentSortBy: String, currentOrder: String, currentFilter: String, currentFilterable: String)
 
 @****************************************
 * Helper generating navigation links    *
@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    routes.Prescriptions.list(newPage, sortBy, order, currentFilter, currentFilterable)
+    routes.Users.viewUsers(newPage, sortBy, order, currentFilter, currentFilterable)
     
 }
 
@@ -39,7 +39,7 @@
 
 <section id="list">
     
-    <h1 id="homeTitle">@Messages("prescriptions.list.title", currentPage.getTotalRowCount)</h1>
+    <h1 id="homeTitle">@Messages("users.viewUsers.title", currentPage.getTotalRowCount)</h1>
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -49,12 +49,12 @@
 
     <div id="actions">
         
-        <form action="@link(0, "patientName")" method="GET">
+        <form action="@link(0, "username")" method="GET">
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by @currentFilterable...">
             <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.Prescriptions.createPrescription()">Add a new prescription</a>
+        <a class="btn success" id="add" href="/createUser/@(currentPage.getTotalRowCount + 1)">Add a new user</a>
         
     </div>
     
@@ -70,65 +70,89 @@
             <thead>
                 <tr>
                     @header("id", "ID")             
-                    @header("patientName", "Patient Name")
-                    @header("staffName", "Staff Name")
-                    @header("medicationName", "Medication Name")                    
-                    @header("dosage", "Dosage in milligrams")
-                    @header("frequency", "Frequency in hours")  
-                    @header("endDate", "End Date")              
+                    @header("username", "User name")
+                    @header("email", "Email Address")
+                    @header("phone", "Phone Number")                    
+                    @header("user_type", "User Type")
+                    @header("address", "Address")   
+                    @header("city", "City")
+                    @header("state_", "State")
+                    @header("country", "Country")                   
+                    @header("age", "Age")                           
                 </tr>
             </thead>
             <tbody>
 
-                @for(prescription <- currentPage.getList) {
+                @for(listUser <- currentPage.getList) {
                     <tr>
                         <td>
-                            <span><a href="@routes.Prescriptions.editPrescription(prescription.id)">edit</a></span>
-                            <span><a href="@routes.Prescriptions.deletePrescription(prescription.id)">delete</a></span>
-                            <span>@prescription.id</span>                           
+                            <span><a href="/deleteUser/@listUser.id">delete</a></span>						
+                            <span><a href="/editUser/@listUser.id">edit</a></span>
+                            <span><a href="/viewUser/@listUser.id">@listUser.id</a></span>                           
                         </td>
                         <td>
-                            @if(prescription.patientName == null) {
+                            @if(listUser.username == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.patientName
+                                @listUser.username
                             }
                         </td>
                         <td>
-                            @if(prescription.staffName == null) {
+                            @if(listUser.email == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.staffName
+                                @listUser.email
                             }
                         </td>
                         <td>
-                            @if(prescription.medicationName == null) {
+                            @if(listUser.phone == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.medicationName
+                                @listUser.phone
                             }
                         </td>                       
                         <td>
-                            @if(prescription.dosage == null) {
+                            @if(listUser.user_type == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.dosage
+                                @listUser.user_type
                             }
                         </td>
                         <td>
-                            @if(prescription.frequency == null) {
+                            @if(listUser.address == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.frequency
+                                @listUser.address
                             }
                         </td>   
                         <td>
-                            @if(prescription.endDate == null) {
+                            @if(listUser.city == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.endDate
+                                @listUser.city
                             }
                         </td>               
+                        <td>
+                            @if(listUser.state_ == null) {
+                                <em>-</em>
+                            } else {
+                                @listUser.state_
+                            }
+                        </td>   
+                        <td>
+                            @if(listUser.country == null) {
+                                <em>-</em>
+                            } else {
+                                @listUser.country
+                            }
+                        </td>               
+                        <td>
+                            @if(listUser.age == null) {
+                                <em>-</em>
+                            } else {
+                                @listUser.age
+                            }
+                        </td>                       
                     </tr>
                 }
 

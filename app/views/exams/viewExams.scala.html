@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    routes.Exams.list(newPage, sortBy, order, currentFilter, currentFilterable)
+    routes.Exams.viewExams(newPage, sortBy, order, currentFilter, currentFilterable)
     
 }
 
@@ -39,7 +39,7 @@
 
 <section id="list">
     
-    <h1 id="homeTitle">@Messages("exams.list.title", currentPage.getTotalRowCount)</h1>
+    <h1 id="homeTitle">@Messages("exams.viewExams.title", currentPage.getTotalRowCount)</h1>
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -54,7 +54,7 @@
             <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.Exams.createExam()">Add a new exam</a>
+        <a class="btn success" id="add" href="/createExam/@(currentPage.getTotalRowCount + 1)">Add a new exam</a>
         
     </div>
     
@@ -85,9 +85,9 @@
                 @for(exam <- currentPage.getList) {
                     <tr>
                         <td>
-                            <span><a href="@routes.Exams.editExam(exam.id)">edit</a></span>
-                            <span><a href="@routes.Exams.deleteExam(exam.id)">delete</a></span>
-                            <span>@exam.id</span>                                                   
+                            <span><a href="/deleteExam/@exam.id">delete</a></span>						
+                            <span><a href="/editExam/@exam.id">edit</a></span>
+                            <span><a href="/viewExam/@exam.id">@exam.id</a></span>                                                   
                         </td>
                         <td>
                             @if(exam.patientName == null) {

@@ -4,12 +4,12 @@
 @import helper.twitterBootstrap._
 
 @title = {
-    Create Prescription <small><a href="@routes.Prescriptions.editPrescription(prescription.id)">Or edit an existing prescription</a></small>
+    Create Prescription <small><a href="/editPrescription/@prescription.id">Or edit an existing prescription</a></small>
 }
 
 @main(user) {
     
-    @helper.form(action = routes.Prescriptions.updatePrescription(prescription.id)) {
+    @helper.form(action = routes.Prescriptions.savePrescription(prescription.id)) {
         
         <fieldset class="createAccount">
             <legend>Prescription information</legend>
@@ -52,7 +52,7 @@
 
             @inputDate(
                 createPrescriptionForm("endDate"), '_label -> "End Date",
-                '_help -> "Enter the date when the patient should stop taking the prescription."
+                '_help -> "Enter the date when the patient should stop taking the prescription. Format: yyyy-MM-dd"
             )				
         </fieldset>
         <div class="actions">

@@ -26,7 +26,7 @@ public class Users extends Controller {
      * This result directly redirect to application home. Pulls a list of users filtered by username.
      */
     public static Result GO_HOME = redirect(
-        routes.Users.list(0, "username", "asc", "", "username")
+        routes.Users.viewUsers(0, "username", "asc", "", "username")
     );
     
     /**
@@ -45,9 +45,9 @@ public class Users extends Controller {
      * @param filterable User property to which filter is applied    
      * @param filter Filter applied on user names
      */
-    public static Result list(int page, String sortBy, String order, String filter, String filterable) {
+    public static Result viewUsers(int page, String sortBy, String order, String filter, String filterable) {
         return ok(
-            list.render(
+            viewUsers.render(
                 User.findByEmail(request().username()), 
                 User.page(page, 10, sortBy, order, filter, filterable),
                 sortBy, order, filter, filterable
@@ -65,6 +65,19 @@ public class Users extends Controller {
                 User.findById(id)				
             )
         );
+    }   
+
+    /**
+     * Display a blank createUser form.
+     */ 
+    public static Result createUser(Integer id) { 
+        return ok(
+            form.render(
+                User.findByEmail(request().username()), 
+				User.emptyUser(),
+                userForm.fill(User.emptyUser())
+            )
+        );  
     }   	
     
     /**
@@ -72,7 +85,7 @@ public class Users extends Controller {
      */
     public static Result editUser(Integer id) { 
         return ok(
-            editUser.render(
+            form.render(
                 User.findByEmail(request().username()), 
 				User.findById(id),
                 userForm.fill(User.findById(id))
@@ -81,11 +94,12 @@ public class Users extends Controller {
     }   
 	
     /**
-     * Handle the 'edit form' submission 
+     * Handle the form submission 
      *
-     * @param id Id of the user to edit
+     * @param userID Id of the user who is logged in
+	 * @param updatedID Id of the user whose account is saved.
      */
-    public static Result updateUser(Integer userID, Integer updatedID) {
+    public static Result saveUser(Integer userID, Integer savedID) {
        Form<User> filledForm = form(User.class, User.All.class).bindFromRequest();
               
         // Check repeated password
@@ -104,12 +118,16 @@ public class Users extends Controller {
         
         if(filledForm.hasErrors()) {
 			User emptyUser = User.emptyUser();		
-            return badRequest(editUser.render(emptyUser, emptyUser, filledForm));
+            return badRequest(form.render(User.findById(userID), User.findById(savedID), filledForm));
         } else {
-			User updated = filledForm.get();
-			updated.update(updatedID);
-			flash("success", "User has been updated");
-			return ok(viewUser.render(User.findById(userID), updated));
+			User saved = filledForm.get();
+			if(savedID == User.incrementId()) {              //Checks if the id of the saved user account is new,
+				filledForm.get().save();								 //If so, use save() to insert the user in the database
+			} else {										 //Otherwise, the user account must already exist, 
+				saved.update(savedID);						 //so use update() to change the existing user
+			}
+			flash("success", "User has been saved");
+			return ok(viewUser.render(User.findById(userID), saved));
         }	
     }	
     

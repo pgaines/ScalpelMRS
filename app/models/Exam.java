@@ -2,10 +2,11 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+import javax.validation.*;
 
 import play.db.ebean.*;
 import play.data.format.*;
-import play.data.validation.*;
+import play.data.validation.Constraints.*;
 
 import com.avaje.ebean.*;
 
@@ -16,20 +17,30 @@ import com.avaje.ebean.*;
 @Table(name="exam")
 public class Exam extends Model {
 
+    public interface All {}
+    public interface Step1{}    
+	public interface Step2{} 	
+
     @Id
     public Integer id;
     
-    @Constraints.Required
+    @Required(groups = {All.class, Step1.class})
+    @MinLength(value = 4, groups = {All.class, Step1.class})
     public String patientName;	
+	
+	@Required(groups = {All.class, Step1.class})
+    @MinLength(value = 4, groups = {All.class, Step1.class})
     public String staffName; //attending physician
  
+ 	@Required(groups = {All.class, Step2.class})
     public Float systolic;	        //Systolic Blood pressure, in units of mm Hg (millimeters of Mercury)
     public Float diastolic;	        //Diastolic Blood pressure, in units of mm Hg (millimeters of Mercury)	
     public Float bloodSugar;		//in units of mg/dL (milligrams per decilitre)
     public Float weight;			//in units of lbs.
     public Float height;			//in units of inches
-	
-    @Formats.DateTime(pattern="MM/dd/yy")
+
+	@Required(groups = {All.class, Step2.class})	
+    @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date date;		
 	
     public Exam(Integer id, String patientName, String staffName, Float systolic, Float diastolic, Float bloodSugar, Float weight, Float height, Date date) {

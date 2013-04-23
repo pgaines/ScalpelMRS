@@ -17,8 +17,7 @@
     <body>
         <header>
             <a href="/" id="logo"><span>Scalpel</span>MRS</a>
-            <dl id="user">
-				@if((user.username != null) && (user != null)) {			
+            <dl id="user">			
                 <dt>@user.username <span>(@user.email)</span></dt>			
                 <dd>
                     <a href="/editUser/@user.id">Edit Account</a>
@@ -29,30 +28,29 @@
                 <dd>
                     <a href="/logout">Logout</a>
                 </dd>
-            </dl>
-				}			
-        </header>
-			@if((user.username != null) && (user != null)) {			
-				<nav>			
-				<h4 class="dashboard"><a href="/">Dashboard</a></h4>
-				@if(user.user_type != "NewUser") {
-					@if((user.user_type != "Patient")) {				
-						<h4 class="users"><a href="/users">Users</a></h4>	
-						<h4 class="users"><a href="/newusers">New Users</a></h4>					
-						<h4 class="doctors"><a href="/doctors">Doctors</a></h4>		
-						<h4 class="doctors"><a href="/nurses">Nurses</a></h4>						
-						<h4 class="patients"><a href="/patients">Patients</a></h4>	
-						<h4 class="exams"><a href="/exams/staff">Exams</a></h4>	
-						<h4 class="prescriptions"><a href="/prescriptions/staff">Prescriptions</a></h4>				
-					}
-					@if((user.user_type == "Patient")) {			
-						<h4 class="exams"><a href="/exams/patients">Exams</a></h4>	
-						<h4 class="prescriptions"><a href="/prescriptions/patients">Prescriptions</a></h4>
-					}		
-				}
-				</nav>				
-			}
-        <section @if((user.username == null) || (user == null)) { id="createAccount" } else { id="main" }>
+            </dl>			
+        </header>		
+		<nav>			
+			<h4 class="dashboard"><a href="/">Dashboard</a></h4>
+			@if((user.user_type == "Doctor")) {				
+				<h4 class="users"><a href="/viewUsers">Users</a></h4>						
+				<h4 class="doctors"><a href="/viewUsers/doctors">Doctors</a></h4>		
+				<h4 class="doctors"><a href="/viewUsers/nurses">Nurses</a></h4>						
+				<h4 class="patients"><a href="/viewUsers/patients">Patients</a></h4>	
+				<h4 class="exams"><a href="/viewExams/staff">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/viewPrescriptions/staff">Prescriptions</a></h4>	
+			} 
+			@if((user.user_type == "Nurse")) {						
+				<h4 class="patients"><a href="/viewUsers/patients">Patients</a></h4>	
+				<h4 class="exams"><a href="/viewExams/staff">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/viewPrescriptions/staff">Prescriptions</a></h4>		
+			} 
+			@if((user.user_type == "Patient")) {	
+				<h4 class="exams"><a href="/viewExams/patients">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/viewPrescriptions/patients">Prescriptions</a></h4>
+			}		
+		</nav>
+        <section id="main">
             @body
         </section>
     </body>

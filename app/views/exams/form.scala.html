@@ -9,7 +9,7 @@
 
 @main(user) {
     
-    @helper.form(action = routes.Exams.updateExam(exam.id)) {
+    @helper.form(action = routes.Exams.saveExam(exam.id)) {
         
         <fieldset class="createAccount">
             <legend>Exam information</legend>
@@ -62,12 +62,12 @@
 
             @inputDate(
                 createExamForm("date"), '_label -> "Date",
-                '_help -> "Enter the date when the exam took place."
+                '_help -> "Enter the date when the exam took place. Format: yyyy-MM-dd"
             )				
         </fieldset>
         <div class="actions">
             <input type="submit" class="btn primary" value="Submit">
-            <a href="@routes.Exams.index" class="btn">Cancel</a>
+            <a href="/exams" class="btn">Cancel</a>
         </div>
         
     }

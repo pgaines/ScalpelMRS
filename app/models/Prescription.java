@@ -2,10 +2,11 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+import javax.validation.*;
 
 import play.db.ebean.*;
 import play.data.format.*;
-import play.data.validation.*;
+import play.data.validation.Constraints.*;
 
 import com.avaje.ebean.*;
 
@@ -16,17 +17,28 @@ import com.avaje.ebean.*;
 @Table(name="prescription")
 public class Prescription extends Model {
 
+    public interface All {}
+    public interface Step1{}    
+	public interface Step2{} 
+
     @Id
     public Integer id;
     
-    @Constraints.Required
-    public String patientName;
-    public String staffName;
+    @Required(groups = {All.class, Step1.class})
+    @MinLength(value = 4, groups = {All.class, Step1.class})
+    public String patientName;	
+	
+	@Required(groups = {All.class, Step1.class})
+    @MinLength(value = 4, groups = {All.class, Step1.class})
+    public String staffName; //attending physician
+	
+ 	@Required(groups = {All.class, Step2.class})	
     public String medicationName;   
     public String dosage;                   // in milligrams
     public String frequency;                // per # of hours
     
-    @Formats.DateTime(pattern="MM/dd/yy")
+	@Required(groups = {All.class, Step2.class})	
+    @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date endDate;                        //When to stop taking the medication
 	
     public Prescription(Integer id, String patientName, String staffName, String medicationName, String dosage, String frequency, Date endDate) {

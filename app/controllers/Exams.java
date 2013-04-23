@@ -26,7 +26,7 @@ public class Exams extends Controller {
      * This result directly redirect to application home. Pulls a list of exams filtered by patientName.
      */
     public static Result GO_HOME = redirect(
-        routes.Exams.list(0, "patientName", "asc", "", "patientName")
+        routes.Exams.viewExams(0, "patientName", "asc", "", "patientName")
     );
     
     /**
@@ -39,11 +39,11 @@ public class Exams extends Controller {
     /**
      * Display the exam summary
      */  
-    public static Result summary(Exam exam) {
+    public static Result viewExam(Integer id) {
         return ok(
-            summary.render(
+            viewExam.render(
                 User.findByEmail(request().username()),
-                exam
+                Exam.findById(id)
             )
         );
     }       
@@ -57,15 +57,29 @@ public class Exams extends Controller {
      * @param filterable Exam property to which filter is applied    
      * @param filter Filter applied on Filterable
      */
-    public static Result list(int page, String sortBy, String order, String filter, String filterable) {
+    public static Result viewExams(int page, String sortBy, String order, String filter, String filterable) {
         return ok(
-            list.render(
+            viewExams.render(
                 User.findByEmail(request().username()), 
                 Exam.page(page, 10, sortBy, order, filter, filterable),
                 sortBy, order, filter, filterable
             )
         );
     }  
+    
+   /**
+     * Display a blank createExam form.
+     */ 
+    public static Result createExam(Integer id) {
+        Exam emptyExam = Exam.emptyExam();  
+        return ok(
+            form.render(
+                User.findByEmail(request().username()),             
+                emptyExam,
+                createExamForm.fill(emptyExam)
+            )
+        );  
+    }   
 
     /**
      * Display a form pre-filled with a exam.
@@ -78,54 +92,27 @@ public class Exams extends Controller {
                 createExamForm.fill(Exam.findById(id))
             )
         );  
-    }   
-    
-   /**
-     * Display a blank createExam form.
-     */ 
-    public static Result createExam() {
-        Exam emptyExam = Exam.emptyExam();  
-        return ok(
-            create_exam_form.render(
-                User.findByEmail(request().username()),             
-                emptyExam,
-                createExamForm.fill(emptyExam)
-            )
-        );  
-    }   
+    }    
 
     /**
      * Handle the create exam form submission.
      */
-    public static Result submitCreateExam() {
-        Form<Exam> filledForm = form(Exam.class).bindFromRequest();
+    public static Result saveExam(Integer id) {
+        Form<Exam> filledForm = form(Exam.class, Exam.All.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Exam emptyExam = Exam.emptyExam();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
-        } else {
-            filledForm.get().save();        
-            Exam created = filledForm.get();
-            return ok(summary.render(User.findByEmail(request().username()), created));
+        } else {    
+            if(id == Exam.incrementId()) {          
+                filledForm.get().save();        
+            } else {
+                filledForm.get().update(id);
+                flash("success", "Exam has been updated");  
+            }               
+            return ok(viewExam.render(User.findByEmail(request().username()), filledForm.get()));
         }
-    }    
-
-    
-    /**
-     * Handle the form submission for editExam.
-     */
-    public static Result updateExam(Integer id) {
-        Form<Exam> filledForm = form(Exam.class).bindFromRequest();
-        
-        if(filledForm.hasErrors()) {
-            Exam emptyExam = Exam.emptyExam();      
-            return badRequest(form.render(User.findByEmail(request().username()), emptyExam, filledForm));
-        } else {
-            filledForm.get().update(id);
-            flash("success", "Exam has been updated");
-            return GO_HOME;
-        }
-    }           
+    }      
     
     /**
      * Handle exam deletion

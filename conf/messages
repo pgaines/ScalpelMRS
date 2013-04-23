@@ -1,5 +1,5 @@
 # Messages
 
-users.list.title={0,choice,0#No users|1#One user|1<{0,number,integer} users} found
-prescriptions.list.title={0,choice,0#No prescriptions|1#One prescription|1<{0,number,integer} prescriptions} found
-exams.list.title={0,choice,0#No exams|1#One exam|1<{0,number,integer} exams} found
+users.viewUsers.title={0,choice,0#No users|1#One user|1<{0,number,integer} users} found
+prescriptions.viewPrescriptions.title={0,choice,0#No prescriptions|1#One prescription|1<{0,number,integer} prescriptions} found
+exams.viewExams.title={0,choice,0#No exams|1#One exam|1<{0,number,integer} exams} found

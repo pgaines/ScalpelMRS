@@ -26,7 +26,7 @@ public class Prescriptions extends Controller {
      * This result directly redirect to application home. Pulls a list of prescriptions filtered by prescriptionname.
      */
     public static Result GO_HOME = redirect(
-        routes.Prescriptions.list(0, "id", "asc", "", "patientName")
+        routes.Prescriptions.viewPrescriptions(0, "id", "asc", "", "patientName")
     );
     
     /**
@@ -39,11 +39,11 @@ public class Prescriptions extends Controller {
     /**
      * Display the prescription summary
      */  
-    public static Result summary(Prescription prescription) {
+    public static Result viewPrescription(Integer id) {
 		return ok(
-			summary.render(
+			viewPrescription.render(
 				User.findByEmail(request().username()),
-				prescription
+				Prescription.findById(id)
 			)
 		);
 	}		
@@ -57,9 +57,9 @@ public class Prescriptions extends Controller {
 	 * @param filterable Prescription property to which filter is applied	 
      * @param filter Filter applied on Filterable
      */
-    public static Result list(int page, String sortBy, String order, String filter, String filterable) {
+    public static Result viewPrescriptions(int page, String sortBy, String order, String filter, String filterable) {
         return ok(
-            list.render(
+            viewPrescriptions.render(
                 User.findByEmail(request().username()), 
                 Prescription.page(page, 10, sortBy, order, filter, filterable),
                 sortBy, order, filter, filterable
@@ -83,10 +83,10 @@ public class Prescriptions extends Controller {
    /**
      * Display a blank createPrescription form.
      */ 
-    public static Result createPrescription() {
+    public static Result createPrescription(Integer id) {
         Prescription emptyPrescription = Prescription.emptyPrescription();  
         return ok(
-            create_prescription_form.render(
+            form.render(
                 User.findByEmail(request().username()),             
                 emptyPrescription,
                 createPrescriptionForm.fill(emptyPrescription)
@@ -97,34 +97,22 @@ public class Prescriptions extends Controller {
     /**
      * Handle the form submission.
      */
-    public static Result submitCreatePrescription() {
-        Form<Prescription> filledForm = form(Prescription.class).bindFromRequest();
+    public static Result savePrescription(Integer id) {
+        Form<Prescription> filledForm = form(Prescription.class, Prescription.All.class).bindFromRequest();
         
         if(filledForm.hasErrors()) {
             Prescription emptyPrescription = Prescription.emptyPrescription();      
             return badRequest(form.render(User.findByEmail(request().username()), emptyPrescription, filledForm));
         } else {
-            filledForm.get().save();		
-            Prescription created = filledForm.get();
-            return ok(summary.render(User.findByEmail(request().username()), created));
+		    if(id == Prescription.incrementId()) {
+			    filledForm.get().save();		
+			} else {
+				filledForm.get().update(id);
+				flash("success", "Prescription has been updated");			
+			}
+			return ok(viewPrescription.render(User.findByEmail(request().username()), filledForm.get()));
         }
-    }       
-	
-    /**
-     * Handle the form submission for editPrescription.
-     */
-    public static Result updatePrescription(Integer id) {
-        Form<Prescription> filledForm = form(Prescription.class).bindFromRequest();
-        
-        if(filledForm.hasErrors()) {
-            Prescription emptyPrescription = Prescription.emptyPrescription();      
-            return badRequest(form.render(User.findByEmail(request().username()), emptyPrescription, filledForm));
-        } else {
-			filledForm.get().update(id);
-			flash("success", "Prescription has been updated");
-			return GO_HOME;
-        }
-    }     	
+    }        	
 	
     /**
      * Handle prescription deletion
