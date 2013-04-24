@@ -1,0 +1,14 @@
+@(user: User)
+
+<br/>
+<div class="actions">	
+@if((user.user_type == "Doctor")) {			
+<a href="/doctorDashboard" class="btn">Ok</a>
+} 
+@if((user.user_type == "Nurse")) {	
+<a href="/nurseDashboard" class="btn">Ok</a>
+} 
+@if((user.user_type == "Patient")) {
+<a href="/patientDashboard" class="btn">Ok</a>
+}	
+</div> 

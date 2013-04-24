@@ -27,7 +27,7 @@ public class User extends Model {
     @Required(groups = {All.class, Step1.class})
     @Email(groups = {All.class, Step1.class})
     public String email;	
-	
+
     @Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
     public String username;
@@ -47,7 +47,6 @@ public class User extends Model {
 	
 	@Min(value = 18, groups = {All.class, Step2.class}) @Max(value = 100, groups = {All.class, Step2.class})
 	public Integer age;
-	
     
     public User() {}
 

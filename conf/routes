@@ -3,7 +3,13 @@
 # ~~~~
 
 # The home page
-GET     /                                   controllers.Dashboard.dashboard()
+GET     /                                  controllers.Dashboard.landingPage()
+
+# Dashboards
+
+GET     /doctorDashboard                    controllers.Dashboard.doctorDashboard()
+GET     /nurseDashboard                     controllers.Dashboard.nurseDashboard()
+GET     /patientDashboard                   controllers.Dashboard.patientDashboard()
 
 # Authentication
 GET     /login                              controllers.Application.login()

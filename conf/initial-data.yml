@@ -5,7 +5,7 @@ users:
 
     - !!models.User  
         id:         1
-        email:      jdorian@scalpelmrs.com
+        email:      jdorian@scalpelmrs.com	
         username:       John Dorian
         password:   secret
         user_type:  Doctor

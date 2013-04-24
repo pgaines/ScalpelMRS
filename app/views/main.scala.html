@@ -31,8 +31,8 @@
             </dl>			
         </header>		
 		<nav>			
-			<h4 class="dashboard"><a href="/">Dashboard</a></h4>
-			@if((user.user_type == "Doctor")) {				
+			@if((user.user_type == "Doctor")) {		
+	    		<h4 class="dashboard"><a href="/doctorDashboard">Dashboard</a></h4>			
 				<h4 class="users"><a href="/viewUsers">Users</a></h4>						
 				<h4 class="doctors"><a href="/viewUsers/doctors">Doctors</a></h4>		
 				<h4 class="doctors"><a href="/viewUsers/nurses">Nurses</a></h4>						
@@ -40,12 +40,14 @@
 				<h4 class="exams"><a href="/viewExams/staff">Exams</a></h4>	
 				<h4 class="prescriptions"><a href="/viewPrescriptions/staff">Prescriptions</a></h4>	
 			} 
-			@if((user.user_type == "Nurse")) {						
+			@if((user.user_type == "Nurse")) {		
+	    		<h4 class="dashboard"><a href="/nurseDashboard">Dashboard</a></h4>				
 				<h4 class="patients"><a href="/viewUsers/patients">Patients</a></h4>	
 				<h4 class="exams"><a href="/viewExams/staff">Exams</a></h4>	
 				<h4 class="prescriptions"><a href="/viewPrescriptions/staff">Prescriptions</a></h4>		
 			} 
-			@if((user.user_type == "Patient")) {	
+			@if((user.user_type == "Patient")) {
+	    		<h4 class="dashboard"><a href="/patientDashboard">Dashboard</a></h4>				
 				<h4 class="exams"><a href="/viewExams/patients">Exams</a></h4>	
 				<h4 class="prescriptions"><a href="/viewPrescriptions/patients">Prescriptions</a></h4>
 			}		

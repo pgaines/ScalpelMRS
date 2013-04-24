@@ -45,7 +45,7 @@ public class Application extends Controller {
         } else {
             session("email", loginForm.get().email);
             return redirect(
-                routes.Dashboard.dashboard()
+                routes.Dashboard.landingPage()
             );
         }
     }
