@@ -1,0 +1,50 @@
+@(user: User, examList: List[Exam])
+
+<div id="mainContent">
+<section id="comments">
+<h1>diastolic</h1>
+<article>
+
+<div id="diastolic" style="width: 350px; height: 300px;"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+$(function() {
+
+	var diastolic = [];
+	for (var i = 0; i < 14; i += 0.5) {
+		diastolic.push([i, Math.sin(i)]);
+	}
+	
+	var placeholder = "#diastolic"
+	
+	var data = [ {
+				data: diastolic,
+				label: "(x-axis: Exam)<br/> (y-axis: diastolic blood pressure (mm Hg))"
+	} ]
+	
+	var options = {
+		series: {
+			lines: { show: true },
+			points: { show: true }
+		},
+		grid: {
+			hoverable: true,
+			clickable: true
+		},
+		yaxis: {
+			min: 0,
+			max: 200
+		},	
+		xaxis: {
+			min: 0,
+			max: 100
+		}		
+	};	
+
+	$.plot(placeholder, data, options);
+});      
+</script>
+ 
+</article>
+ </section>
+</div>

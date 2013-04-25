@@ -12,6 +12,7 @@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/backbone-min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/flot/jquery.flot.js")"></script>		
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/flot/jquery.flot.time.js")"></script>		
 
     </head>
     <body>
@@ -23,7 +24,7 @@
                     <a href="/editUser/@user.id">Edit Account</a>
                 </dd>	
                 <dd>
-                    <a href="/viewUser/@user.id">Account Summary</a>
+                    <a href="/viewUser/@user.id/@user.username">Account Summary</a>
                 </dd>				
                 <dd>
                     <a href="/logout">Logout</a>
@@ -37,8 +38,8 @@
 				<h4 class="doctors"><a href="/viewUsers/doctors">Doctors</a></h4>		
 				<h4 class="doctors"><a href="/viewUsers/nurses">Nurses</a></h4>						
 				<h4 class="patients"><a href="/viewUsers/patients">Patients</a></h4>	
-				<h4 class="exams"><a href="/viewExams/staff">Exams</a></h4>	
-				<h4 class="prescriptions"><a href="/viewPrescriptions/staff">Prescriptions</a></h4>	
+				<h4 class="exams"><a href="/viewExams">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/viewPrescriptions">Prescriptions</a></h4>	
 			} 
 			@if((user.user_type == "Nurse")) {		
 	    		<h4 class="dashboard"><a href="/nurseDashboard">Dashboard</a></h4>				

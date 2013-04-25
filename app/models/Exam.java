@@ -64,10 +64,10 @@ public class Exam extends Model {
     public static Finder<Integer,Exam> find = new Finder<Integer,Exam>(Integer.class, Exam.class); 	
 
     /**
-     * Return a page of prescriptions
+     * Return a page of exams
      *
      * @param page Page to display
-     * @param pageSize Number of prescriptions per page
+     * @param pageSize Number of exams per page
      * @param sortBy Exam property used for sorting
      * @param order Sort order (either or asc or desc)
 	 * @param filterable Exam property to which filter is applied	 
@@ -81,9 +81,22 @@ public class Exam extends Model {
                 .findPagingList(pageSize)
                 .getPage(page);
     }		
+	
+    /**
+     * Return a List of Exams for a specific user, sorted ascending by date
+     *
+     * @param username Patient for whom graphs will be generated
+     */
+    public static List<Exam> graphList(String username) {
+        return 
+            find.where()
+                .ilike("username", "%" + username + "%")
+                .orderBy("date" + " " + "asc")
+				.findList();
+    }		
 
 	/**
-	 * Create an empty prescription
+	 * Create an empty exam
 	 */
 	 public static Exam emptyExam() {
 		Integer id = Exam.incrementId();	 
@@ -101,7 +114,7 @@ public class Exam extends Model {
     }
 
     /**
-     * Retrieve a prescription by id.
+     * Retrieve a exam by id.
      */
     public static Exam findById(Integer id) {
         return find.where().eq("id", id).findUnique();

@@ -1,0 +1,48 @@
+@(user: User, examList: List[Exam])
+
+<div id="mainContent">
+<section id="comments">
+<h1>bloodsugar</h1>
+<article>
+
+<div id="bloodsugar" style="width: 350px; height: 300px;"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+$(function() {
+
+	var bloodsugar = [];
+	for (var i = 0; i < 14; i += 0.5) {
+		bloodsugar.push([i, Math.sin(i)]);
+	}
+	var placeholder = "#bloodsugar"
+	
+	var data = [ 
+			{ data: bloodsugar, label: "(x-axis: Exam)<br/> (y-axis: bloodsugar (mg/dL))"	}
+	]	
+	
+	var options = {
+		series: {
+			lines: { show: true },
+			points: { show: true }
+		},
+		grid: {
+			hoverable: true,
+			clickable: true
+		},
+		yaxis: {
+			min: 0,
+			max: 200
+		},	
+		xaxis: {
+			min: 0,
+			max: 20
+		}		
+	};	
+
+	$.plot(placeholder, data, options);
+});   
+</script>
+ 
+</article>
+ </section>
+</div>

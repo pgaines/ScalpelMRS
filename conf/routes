@@ -20,7 +20,7 @@ GET     /logout                             controllers.Application.logout()
 GET     /viewUsers                          controllers.Users.viewUsers(p:Int ?= 0, s ?= "username", o ?= "asc", f ?= "", i ?= "username")
 
 # Users
-GET     /viewUser/:id                       controllers.Users.viewUser(id:Integer)
+GET     /viewUser/:id/:username                       controllers.Users.viewUser(id:Integer,username:String)
 GET     /createUser/:id                     controllers.Users.createUser(id:Integer)
 GET     /editUser/:id                       controllers.Users.editUser(id:Integer)
 POST    /saveUser/:userID/:savedID          controllers.Users.saveUser(userID:Integer, savedID:Integer)

@@ -23,10 +23,10 @@ public class Exams extends Controller {
     final static Form<Exam> createExamForm = form(Exam.class);
  
     /**
-     * This result directly redirect to application home. Pulls a list of exams filtered by patientName.
+     * This result directly redirect to application home. Pulls a list of exams filtered by username.
      */
     public static Result GO_HOME = redirect(
-        routes.Exams.viewExams(0, "patientName", "asc", "", "patientName")
+        routes.Exams.viewExams(0, "username", "asc", "", "username")
     );
     
     /**

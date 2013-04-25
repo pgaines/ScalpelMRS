@@ -1,0 +1,54 @@
+@(user: User, examList: List[Exam])
+
+<div id="mainContent">
+<section id="comments">
+<h1>systolic</h1>
+<article>
+
+@for(exam <- examList) { @exam.systolic <br/> }
+
+<div id="systolic" style="width: 350px; height: 300px;"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+$(function() {
+
+	var systolic = [];
+	
+    $.getJSON("@{Exam.graphList(user.username)}", function(exams){
+        $.each(exams, function(index, exam){
+            systolic.push([exam.id,exam.systolic]);
+        });	
+    }); 	
+	
+	var placeholder = "#systolic"
+	
+	var data = [ 
+			{ data: systolic, label: "(x-axis: Exam)<br/> (y-axis: systolic blood pressure (mm Hg))"	}
+	]	
+	
+	var options = {
+		series: {
+			lines: { show: true },
+			points: { show: true }
+		},
+		grid: {
+			hoverable: true,
+			clickable: true
+		},
+		yaxis: {
+			min: 0,
+			max: 200
+		},	
+		xaxis: {
+			min: 0,
+			max: 20
+		}		
+	};	
+
+	$.plot(placeholder, data, options);
+});     
+</script>
+ 
+</article>
+</section>
+</div>

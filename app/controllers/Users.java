@@ -11,6 +11,7 @@ import models.*;
 
 import views.html.*;
 import views.html.users.*;
+import views.html.users.graphs.*;
 
 /**
  * Manage users related operations.
@@ -77,11 +78,12 @@ public class Users extends Controller {
     /**
      * Display the user's account summary
      */  
-    public static Result viewUser(Integer id) {
+    public static Result viewUser(Integer id, String username) {
         return ok(
             viewUser.render(
                 User.findByEmail(request().username()), 
-                User.findById(id)				
+                User.findById(id),
+				Exam.graphList(username)  //create a graph list sorted ascending by date
             )
         );
     }   
@@ -146,7 +148,7 @@ public class Users extends Controller {
 				saved.update(savedID);						 //so use update() to change the existing user
 			}
 			flash("success", "User has been saved");
-			return ok(viewUser.render(User.findById(userID), saved));
+			return ok(viewUser.render(User.findById(userID), saved, Exam.graphList(saved.username)));
         }	
     }	
     
