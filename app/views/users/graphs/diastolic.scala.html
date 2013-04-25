@@ -11,8 +11,8 @@
 $(function() {
 
 	var diastolic = [];
-	for (var i = 0; i < 14; i += 0.5) {
-		diastolic.push([i, Math.sin(i)]);
+	for (var i = 0; i < 20; i += 2) {
+		diastolic.push([i,i]);
 	}
 	
 	var placeholder = "#diastolic"
@@ -37,7 +37,7 @@ $(function() {
 		},	
 		xaxis: {
 			min: 0,
-			max: 100
+			max: 20
 		}		
 	};	
 

@@ -5,14 +5,15 @@
 <h1>systolic</h1>
 <article>
 
-@for(exam <- examList) { @exam.systolic <br/> }
-
 <div id="systolic" style="width: 350px; height: 300px;"></div>
 
 <script id="source" language="javascript" type="text/javascript">
 $(function() {
 
 	var systolic = [];
+	for (var i = 0; i < 20; i += 5) {
+		systolic.push([i,i]);
+	}	
 	
     $.getJSON("@{Exam.graphList(user.username)}", function(exams){
         $.each(exams, function(index, exam){
