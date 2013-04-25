@@ -109,7 +109,7 @@ users:
         id:         8   
         email:      jtracey@scalpelmrs.com
         username:       Jill Tracey
-        staffName:       Shirley Roberts         
+        staffName:       Carla Turk        
         password:   secret   
         user_type:  Patient     
         phone:      123-456-7890
@@ -142,16 +142,28 @@ exams:
         id:         1
         username:    Harvey Corman
         staffName:      Nurse Tisdale
-        systolic:         117
-        diastolic:         80
-        bloodSugar:       24
+        systolic:         120
+        diastolic:         83
+        bloodSugar:       25
         height:           68
-        weight:           160
+        weight:           162
         comments:      Normal health indicators 
         date:         2013-03-20  
-        
+
     - !!models.Exam
         id:         2
+        username:    Harvey Corman
+        staffName:      Nurse Tisdale
+        systolic:         115
+        diastolic:         78
+        bloodSugar:       23
+        height:           68
+        weight:           164
+        comments:      Gained weight        
+        date:         2013-03-21 
+        
+    - !!models.Exam
+        id:         3
         username:    Brendan Fraser
         staffName:      Shirley Roberts 
         systolic:         120
@@ -163,7 +175,7 @@ exams:
         date:         2013-03-20  
 
     - !!models.Exam
-        id:         3
+        id:         4
         username:    Brendan Fraser
         staffName:      Shirley Roberts 
         systolic:         115
@@ -172,7 +184,31 @@ exams:
         height:           68
         weight:           164
         comments:      Gained weight        
-        date:         2013-03-20        
+        date:         2013-03-21   
+    
+    - !!models.Exam
+        id:         5
+        username:    Jill Tracy
+        staffName:      Carla Turk 
+        systolic:         120
+        diastolic:         83
+        bloodSugar:       25
+        height:           68
+        weight:           162
+        comments:      Gained weight        
+        date:         2013-03-20  
+
+    - !!models.Exam
+        id:         6
+        username:    Jill Tracy
+        staffName:      Carla Turk 
+        systolic:         115
+        diastolic:         78
+        bloodSugar:       23
+        height:           68
+        weight:           164
+        comments:      Gained weight        
+        date:         2013-03-21        
         
 #Prescriptions
         

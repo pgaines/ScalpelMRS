@@ -38,8 +38,8 @@
 				<h4 class="doctors"><a href="/viewUsers/doctors">Doctors</a></h4>		
 				<h4 class="doctors"><a href="/viewUsers/nurses">Nurses</a></h4>						
 				<h4 class="patients"><a href="/viewUsers/patients">Patients</a></h4>	
-				<h4 class="exams"><a href="/viewExams">Exams</a></h4>	
-				<h4 class="prescriptions"><a href="/viewPrescriptions">Prescriptions</a></h4>	
+				<h4 class="exams"><a href="/viewExams/staff/@user.username">Exams</a></h4>	
+				<h4 class="prescriptions"><a href="/viewPrescriptions/staff/@user.username">Prescriptions</a></h4>	
 			} 
 			@if((user.user_type == "Nurse")) {		
 	    		<h4 class="dashboard"><a href="/nurseDashboard">Dashboard</a></h4>				

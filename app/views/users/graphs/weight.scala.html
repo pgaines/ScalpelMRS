@@ -10,10 +10,13 @@
 <script id="source" language="javascript" type="text/javascript">
 $(function() {
 
-	var weight = [];
-	for (var i = 0; i < 20; i += 0.1) {
-		weight.push([i, Math.sin(i)]);
-	}
+	var weight = [[1,162], [2,164]];	
+    $.getJSON("@{Exam.graphList(user.username)}", function(exams){
+        $.each(exams, function(index, exam){
+            weight.push([exam.id,exam.weight]);
+        });	
+    });
+	
 	var placeholder = "#weight"
 	
 	var data = [ 

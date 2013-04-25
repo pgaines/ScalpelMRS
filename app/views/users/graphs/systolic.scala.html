@@ -10,10 +10,7 @@
 <script id="source" language="javascript" type="text/javascript">
 $(function() {
 
-	var systolic = [];
-	for (var i = 0; i < 20; i += 5) {
-		systolic.push([i,i]);
-	}	
+	var systolic = [[1,120], [2,115]];
 	
     $.getJSON("@{Exam.graphList(user.username)}", function(exams){
         $.each(exams, function(index, exam){

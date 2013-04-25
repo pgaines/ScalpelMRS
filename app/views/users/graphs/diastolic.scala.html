@@ -10,10 +10,13 @@
 <script id="source" language="javascript" type="text/javascript">
 $(function() {
 
-	var diastolic = [];
-	for (var i = 0; i < 20; i += 2) {
-		diastolic.push([i,i]);
-	}
+	var diastolic = [[1,83], [2,78]];
+	
+    $.getJSON("@{Exam.graphList(user.username)}", function(exams){
+        $.each(exams, function(index, exam){
+            diastolic.push([exam.id,exam.diastolic]);
+        });	
+    });
 	
 	var placeholder = "#diastolic"
 	

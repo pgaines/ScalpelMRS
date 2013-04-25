@@ -10,10 +10,13 @@
 <script id="source" language="javascript" type="text/javascript">
 $(function() {
 
-	var bloodsugar = [];
-	for (var i = 0; i < 20; i += 0.5) {
-		bloodsugar.push([i, Math.sin(i)]);
-	}
+	var bloodsugar = [[1,25], [2,23]];
+    $.getJSON("@{Exam.graphList(user.username)}", function(exams){
+        $.each(exams, function(index, exam){
+            bloodsugar.push([exam.id,exam.bloodsugar]);
+        });	
+    });	
+	
 	var placeholder = "#bloodsugar"
 	
 	var data = [ 

@@ -98,7 +98,8 @@
             @userViewed.age
         }
     </p>
-</section>   
+</section> 
+@if((userViewed.user_type == "Patient")) {  
 <section class="graphs" style="float:right; position: absolute; top:40px; left: 450px;">
 	@graphs.systolic(userViewed, examList)
 	@graphs.diastolic(userViewed, examList)
@@ -107,5 +108,6 @@
 	@graphs.bloodsugar(userViewed, examList)
 	@graphs.weight(userViewed, examList)
 </section>
+}
 	@ok(user)	
 }
