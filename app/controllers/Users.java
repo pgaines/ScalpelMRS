@@ -56,6 +56,25 @@ public class Users extends Controller {
     }    
 	
     /**
+     * Display the paginated list of users.
+     *
+     * @param page Current page number (starts from 0)
+     * @param sortBy Column to be sorted
+     * @param order Sort order (either asc or desc)
+     * @param filterable User property to which filter is applied    
+     * @param username Filter applied on user names
+     */
+    public static Result viewUsersByUsername(int page, String sortBy, String order, String username, String filterable) {
+        return ok(
+            viewUsers.render(
+                User.findByEmail(request().username()), 
+                User.page(page, 10, sortBy, order, username, filterable),
+                sortBy, order, username, filterable
+            )
+        );
+    }    	
+	
+    /**
      * Display the user's account summary
      */  
     public static Result viewUser(Integer id) {

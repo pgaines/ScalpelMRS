@@ -66,6 +66,25 @@ public class Prescriptions extends Controller {
             )
         );
     }  
+	
+    /**
+     * Display the paginated list of prescriptions.
+     *
+     * @param page Current page number (starts from 0)
+     * @param sortBy Column to be sorted
+     * @param order Sort order (either asc or desc)
+	 * @param filterable Prescription property to which filter is applied	 
+     * @param username Filter applied on Filterable
+     */
+    public static Result viewPrescriptionsByUsername(int page, String sortBy, String order, String username, String filterable) {
+        return ok(
+            viewPrescriptions.render(
+                User.findByEmail(request().username()), 
+                Prescription.page(page, 10, sortBy, order, username, filterable),
+                sortBy, order, username, filterable
+            )
+        );
+    }  	
 
     /**
      * Display a form pre-filled with a prescription.

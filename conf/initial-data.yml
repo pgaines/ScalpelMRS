@@ -5,8 +5,9 @@ users:
 
     - !!models.User  
         id:         1
-        email:      jdorian@scalpelmrs.com	
+        email:      jdorian@scalpelmrs.com  
         username:       John Dorian
+        staffName:       Percy Cox       
         password:   secret
         user_type:  Doctor
         phone:      123-456-7890
@@ -20,6 +21,7 @@ users:
         id:         2   
         email:      pcox@scalpelmrs.com
         username:       Percy Cox
+        staffName:       Percy Cox          
         password:   secret
         user_type:  Doctor
         phone:      123-456-7890
@@ -34,6 +36,7 @@ users:
         id:         3   
         email:      chris.turk@scalpelmrs.com
         username:       Chris Turk
+        staffName:       Percy Cox          
         password:   secret
         user_type:  Doctor
         phone:      123-456-7890
@@ -48,6 +51,7 @@ users:
         id:         4   
         email:      carla.turk@scalpelmrs.com
         username:       Carla Turk
+        staffName:       John Dorian            
         password:   secret      
         user_type:  Nurse
         phone:      123-456-7890
@@ -62,6 +66,7 @@ users:
         id:         5   
         email:      sroberts@scalpelmrs.com
         username:       Shirley Roberts
+        staffName:       John Dorian            
         password:   secret
         user_type:  Nurse
         phone:      123-456-7890
@@ -76,6 +81,7 @@ users:
         id:         6   
         email:      tisdale@scalpelmrs.com
         username:       Nurse Tisdale
+        staffName:       John Dorian            
         password:   secret   
         user_type:  Nurse       
         phone:      123-456-7890
@@ -89,6 +95,7 @@ users:
         id:         7   
         email:      bfraser@scalpelmrs.com
         username:       Brendan Fraser
+        staffName:       Shirley Roberts           
         password:   secret   
         user_type:  Patient  
         phone:      123-456-7890
@@ -102,6 +109,7 @@ users:
         id:         8   
         email:      jtracey@scalpelmrs.com
         username:       Jill Tracey
+        staffName:       Shirley Roberts         
         password:   secret   
         user_type:  Patient     
         phone:      123-456-7890
@@ -115,6 +123,7 @@ users:
         id:         9   
         email:      hcorman@scalpelmrs.com
         username:       Harvey Corman
+        staffName:       Nurse Tisdale            
         password:   secret   
         user_type:  Patient     
         phone:      123-456-7890
@@ -131,35 +140,38 @@ exams:
 
     - !!models.Exam
         id:         1
-        patientName:    Brendan Fraser
-        staffName:      John Dorian
+        username:    Harvey Corman
+        staffName:      Nurse Tisdale
         systolic:         117
         diastolic:         80
         bloodSugar:       24
         height:           68
         weight:           160
+        comments:      Normal health indicators 
         date:         2013-03-20  
         
     - !!models.Exam
         id:         2
-        patientName:    Brendan Fraser
-        staffName:      John Dorian
+        username:    Brendan Fraser
+        staffName:      Shirley Roberts 
         systolic:         120
         diastolic:         83
         bloodSugar:       25
         height:           68
         weight:           162
+        comments:      Gained weight        
         date:         2013-03-20  
 
     - !!models.Exam
         id:         3
-        patientName:    Brendan Fraser
-        staffName:      John Dorian
+        username:    Brendan Fraser
+        staffName:      Shirley Roberts 
         systolic:         115
         diastolic:         78
         bloodSugar:       23
         height:           68
         weight:           164
+        comments:      Gained weight        
         date:         2013-03-20        
         
 #Prescriptions
@@ -168,7 +180,7 @@ prescriptions:
 
     - !!models.Prescription
         id:         1
-        patientName:    Brendan Fraser
+        username:    Brendan Fraser
         staffName:      John Dorian
         medicationName:  Ibuprofin
         dosage:          50
@@ -177,7 +189,7 @@ prescriptions:
 
     - !!models.Prescription
         id:         2
-        patientName:    Harvey Corman
+        username:    Harvey Corman
         staffName:      John Dorian
         medicationName:  Motrin
         dosage:          75
@@ -186,7 +198,7 @@ prescriptions:
 
     - !!models.Prescription
         id:         3
-        patientName:    Brendan Fraser
+        username:    Brendan Fraser
         staffName:      John Dorian
         medicationName:  Vicodin
         dosage:          20

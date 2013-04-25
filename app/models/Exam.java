@@ -26,7 +26,7 @@ public class Exam extends Model {
     
     @Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
-    public String patientName;	
+    public String username;	
 	
 	@Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
@@ -38,14 +38,15 @@ public class Exam extends Model {
     public Float bloodSugar;		//in units of mg/dL (milligrams per decilitre)
     public Float weight;			//in units of lbs.
     public Float height;			//in units of inches
+    public String comments; 		//attending physician can add comments for the patient
 
 	@Required(groups = {All.class, Step2.class})	
     @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date date;		
 	
-    public Exam(Integer id, String patientName, String staffName, Float systolic, Float diastolic, Float bloodSugar, Float weight, Float height, Date date) {
+    public Exam(Integer id, String username, String staffName, Float systolic, Float diastolic, Float bloodSugar, Float weight, Float height, Date date) {
         this.id = id;
-		this.patientName = patientName;
+		this.username = username;
         this.staffName = staffName;
         this.systolic = systolic;		
         this.diastolic = diastolic;

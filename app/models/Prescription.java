@@ -26,7 +26,7 @@ public class Prescription extends Model {
     
     @Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
-    public String patientName;	
+    public String username;	
 	
 	@Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
@@ -41,9 +41,9 @@ public class Prescription extends Model {
     @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date endDate;                        //When to stop taking the medication
 	
-    public Prescription(Integer id, String patientName, String staffName, String medicationName, String dosage, String frequency, Date endDate) {
+    public Prescription(Integer id, String username, String staffName, String medicationName, String dosage, String frequency, Date endDate) {
         this.id = id;
-		this.patientName = patientName;
+		this.username = username;
         this.staffName = staffName;
         this.medicationName = medicationName;		
         this.dosage = dosage;

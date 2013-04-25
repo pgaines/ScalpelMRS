@@ -24,7 +24,7 @@
 			</div>
  
             @inputText(
-                createExamForm("patientName"), 
+                createExamForm("username"), 
                 '_label -> "Patient Name", 
                 '_help -> "Please choose a valid patient name.",
                 '_error -> createExamForm.globalError
@@ -59,6 +59,12 @@
                 createExamForm("height"), '_label -> "height",
                 '_help -> "Enter the height in inches."
             )			
+			@if(user.user_type != "Patient") {
+				@textarea(
+					createExamForm("comments"), 
+					'_label -> "Comments", 'cols -> 50
+				)
+			}
 
             @inputDate(
                 createExamForm("date"), '_label -> "Date",

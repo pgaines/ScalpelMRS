@@ -7,6 +7,7 @@ create table doctor (
   id                        integer not null,
   email                     varchar(255),
   username                  varchar(255),
+  staff_name                varchar(255),
   password                  varchar(255),
   user_type                 varchar(255),
   phone                     varchar(255),
@@ -22,13 +23,14 @@ create table doctor (
 
 create table exam (
   id                        integer not null,
-  patient_name              varchar(255),
+  username                  varchar(255),
   staff_name                varchar(255),
   systolic                  float,
   diastolic                 float,
   blood_sugar               float,
   weight                    float,
   height                    float,
+  comments                  varchar(255),
   date                      timestamp,
   constraint pk_exam primary key (id))
 ;
@@ -37,6 +39,7 @@ create table nurse (
   id                        integer not null,
   email                     varchar(255),
   username                  varchar(255),
+  staff_name                varchar(255),
   password                  varchar(255),
   user_type                 varchar(255),
   phone                     varchar(255),
@@ -54,6 +57,7 @@ create table patient (
   id                        integer not null,
   email                     varchar(255),
   username                  varchar(255),
+  staff_name                varchar(255),
   password                  varchar(255),
   user_type                 varchar(255),
   phone                     varchar(255),
@@ -69,7 +73,7 @@ create table patient (
 
 create table prescription (
   id                        integer not null,
-  patient_name              varchar(255),
+  username                  varchar(255),
   staff_name                varchar(255),
   medication_name           varchar(255),
   dosage                    varchar(255),
@@ -82,6 +86,7 @@ create table user (
   id                        integer not null,
   email                     varchar(255),
   username                  varchar(255),
+  staff_name                varchar(255),
   password                  varchar(255),
   user_type                 varchar(255),
   phone                     varchar(255),

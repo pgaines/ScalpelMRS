@@ -49,13 +49,13 @@
 
     <div id="actions">
         
-        <form action="@link(0, "patientName")" method="GET">
+        <form action="@link(0, "username")" method="GET">
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by @currentFilterable...">
             <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
         </form>
-        
-        <a class="btn success" id="add" href="/createPrescription/@(currentPage.getTotalRowCount + 1)">Add a new prescription</a>
-        
+		@if((user.user_type != "Patient")) {        
+			<a class="btn success" id="add" href="/createPrescription/@(currentPage.getTotalRowCount + 1)">Add a new prescription</a>
+        }
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {
@@ -70,7 +70,7 @@
             <thead>
                 <tr>
                     @header("id", "ID")             
-                    @header("patientName", "Patient Name")
+                    @header("username", "Patient Name")
                     @header("staffName", "Staff Name")
                     @header("medicationName", "Medication Name")                    
                     @header("dosage", "Dosage in milligrams")
@@ -83,15 +83,17 @@
                 @for(prescription <- currentPage.getList) {
                     <tr>
                         <td>
-                            <span><a href="@routes.Prescriptions.editPrescription(prescription.id)">edit</a></span>
-                            <span><a href="@routes.Prescriptions.deletePrescription(prescription.id)">delete</a></span>
-                            <span>@prescription.id</span>                           
+							@if(user.user_type != "Patient") {						
+								<span><a href="editPrescription/@prescription.id">edit</a></span>
+								<span><a href="deletePrescription/@prescription.id">delete</a></span>
+							}
+                            <span><a href="viewPrescription/@prescription.id">@prescription.id</a></span>                           
                         </td>
                         <td>
-                            @if(prescription.patientName == null) {
+                            @if(prescription.username == null) {
                                 <em>-</em>
                             } else {
-                                @prescription.patientName
+                                @prescription.username
                             }
                         </td>
                         <td>

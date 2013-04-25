@@ -8,7 +8,7 @@
     <h6>Patient Name</h6>
     
     <p>
-        @exam.patientName
+        @exam.username
     </p>
     
     <h6>Staff Name</h6>
@@ -45,8 +45,13 @@
     
     <p>
         @exam.height
-    </p>	
-	
+    </p>
+    @if(user.user_type != "Patient") {
+    <h6>Comments</h6>
+    <p>
+        @exam.comments
+    </p>		
+	}
     <h6>Date</h6>
 	
     <p>

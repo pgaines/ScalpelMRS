@@ -30,12 +30,12 @@ public class Exams extends Controller {
     );
     
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to exam list
      */
     public static Result index() {
         return GO_HOME;
-    }       
-    
+    }
+
     /**
      * Display the exam summary
      */  
@@ -66,6 +66,25 @@ public class Exams extends Controller {
             )
         );
     }  
+	
+    /**
+     * Display the paginated list of exams.
+     *
+     * @param page Current page number (starts from 0)
+     * @param sortBy Column to be sorted
+     * @param order Sort order (either asc or desc)
+     * @param filterable Exam property to which filter is applied    
+     * @param username Filter applied on Filterable
+     */
+    public static Result viewExamsByUsername(int page, String sortBy, String order, String username, String filterable) {
+        return ok(
+            viewExams.render(
+                User.findByEmail(request().username()), 
+                Exam.page(page, 10, sortBy, order, username, filterable),
+                sortBy, order, username, filterable
+            )
+        );
+    }  	
     
    /**
      * Display a blank createExam form.

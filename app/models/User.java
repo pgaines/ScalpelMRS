@@ -31,6 +31,9 @@ public class User extends Model {
     @Required(groups = {All.class, Step1.class})
     @MinLength(value = 4, groups = {All.class, Step1.class})
     public String username;
+	
+    @MinLength(value = 4, groups = {All.class, Step1.class})
+    public String staffName; //attending physician	
     
     @Required(groups = {All.class, Step1.class})
     @MinLength(value = 6, groups = {All.class, Step1.class})
@@ -50,9 +53,10 @@ public class User extends Model {
     
     public User() {}
 
-    public User(Integer id, String username, String email, String password, String user_type, String phone, String address, String city, String state_, String country, Integer age) {
+    public User(Integer id, String username, String staffName, String email, String password, String user_type, String phone, String address, String city, String state_, String country, Integer age) {
         this.id = id;
 		this.username = username;
+		this.staffName = staffName;		
         this.email = email;
         this.password = password;
 		this.user_type = user_type;
@@ -105,7 +109,7 @@ public class User extends Model {
 	 public static User emptyUser() {
 		Integer id = User.incrementId();	 
 	    User emptyUser = new User(
-            id, null, null, null, "NewUser", null, null, null, null, null, null
+            id, null, null, null, null, "NewUser", null, null, null, null, null, null
         );
 		return emptyUser;
 	}	

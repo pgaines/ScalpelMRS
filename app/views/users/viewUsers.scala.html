@@ -71,6 +71,7 @@
                 <tr>
                     @header("id", "ID")             
                     @header("username", "User name")
+                    @header("staffName", "Staff name")					
                     @header("email", "Email Address")
                     @header("phone", "Phone Number")                    
                     @header("user_type", "User Type")
@@ -97,6 +98,13 @@
                                 @listUser.username
                             }
                         </td>
+                        <td>
+                            @if(listUser.staffName == null) {
+                                <em>-</em>
+                            } else {
+                                @listUser.staffName
+                            }
+                        </td>						
                         <td>
                             @if(listUser.email == null) {
                                 <em>-</em>

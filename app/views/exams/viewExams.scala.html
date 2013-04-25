@@ -49,7 +49,7 @@
 
     <div id="actions">
         
-        <form action="@link(0, "patientName")" method="GET">
+        <form action="@link(0, "username")" method="GET">
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by @currentFilterable...">
             <input type="submit" id="searchsubmit" value="Filter by @currentFilterable" class="btn primary">
         </form>
@@ -70,13 +70,14 @@
             <thead>
                 <tr>
                     @header("id", "ID")             
-                    @header("patientName", "Patient Name")
+                    @header("username", "Patient Name")
                     @header("staffName", "Staff Name")
                     @header("systolic", "Systolic")                 
                     @header("diastolic", "Diastolic")
                     @header("bloodSugar", "Blood Sugar")
                     @header("weight", "Weight in lbs")
-                    @header("height", "Height in inches")                   
+                    @header("height", "Height in inches")   
+                    @header("comments", "Comments")  					
                     @header("date", "Date")             
                 </tr>
             </thead>
@@ -85,15 +86,17 @@
                 @for(exam <- currentPage.getList) {
                     <tr>
                         <td>
-                            <span><a href="/deleteExam/@exam.id">delete</a></span>						
-                            <span><a href="/editExam/@exam.id">edit</a></span>
+							@if(user.user_type != "Patient") {
+								<span><a href="/deleteExam/@exam.id">delete</a></span>						
+								<span><a href="/editExam/@exam.id">edit</a></span>
+							}
                             <span><a href="/viewExam/@exam.id">@exam.id</a></span>                                                   
                         </td>
                         <td>
-                            @if(exam.patientName == null) {
+                            @if(exam.username == null) {
                                 <em>-</em>
                             } else {
-                                @exam.patientName
+                                @exam.username
                             }
                         </td>
                         <td>
@@ -137,7 +140,14 @@
                             } else {
                                 @exam.height
                             }
-                        </td>                           
+                        </td>  
+                        <td>
+                            @if(exam.comments == null || user.user_type == "Patient") {
+                                <em>-</em>
+                            } else {
+                                @exam.comments
+                            }
+                        </td> 						
                         <td>
                             @if(exam.date == null) {
                                 <em>-</em>
