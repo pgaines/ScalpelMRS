@@ -20,3 +20,8 @@ See also:<br>
 <li>Patient can enter daily blood pressure and sugar levels if a doctor directs the patient to do so</li>
 <li>Patient can check the fluctuation of his/her own health indicators.<br>
 </li></ul>
+
+##Note
+
+This is an experimental web application project for my CSE 360: Intro to Software Development class, using Java and the
+Play! 2.0 Web Application Framework. It has never been deployed in a live environment, and I am not expecting to work on it further anytime soon.
